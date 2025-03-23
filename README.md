@@ -1,4 +1,4 @@
-# alzaheimer
+# alzheimer
 Mind Maze: Supermarket Rush es un juego de carreras casual con vista cenital, 
 donde el jugador debe completar una lista de compras en un supermercado 
 antes de que el tiempo se agote. El protagonista, un anciano con Alzheimer, 
