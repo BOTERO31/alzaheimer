@@ -16,7 +16,7 @@ class Colitions:
         for row_index,row in enumerate(SHOP_MAP):
             for col_index, col in enumerate(row):
                 x = col_index * TILE_SIZE
-                Y = col_index * TILE_SIZE
+                y = col_index * TILE_SIZE
                 if col == 'e':
                     Tile((x,y),[self.visible_sprites])
 
