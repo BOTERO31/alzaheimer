@@ -9,7 +9,7 @@ class Game:
         self.running = True
         
         # background for now
-        self.background = pygame.image.load(join('CODE', 'tile.png')).convert_alpha()
+        self.background = pygame.image.load(join('DATA', 'maps', 'tile.png')).convert_alpha()
         
         # Groups
         self.all_sprites = pygame.sprite.Group()
