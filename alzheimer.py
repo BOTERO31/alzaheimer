@@ -16,7 +16,6 @@ y = 100
 velocidad = 4
 
 #Join imagen
-ruta_sprite = "sprite"
 ruta_tiles = "tiles"
 
 #Imagen
@@ -32,11 +31,11 @@ class Player(pygame.sprite.Sprite):
         # Escalar las imágenes al tamaño deseado
         sprite_size = (120, 120)  # Cambia este tamaño según lo que necesites
         
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite1.png')), sprite_size))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite2.png')), sprite_size))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite3.png')), sprite_size))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite4.png')), sprite_size))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite5.png')), sprite_size))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_tiles, 'up_sprite_1.png')), sprite_size))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_tiles, 'up_sprite_2.png')), sprite_size))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_tiles, 'up_sprite_3.png')), sprite_size))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_tiles, 'up_sprite_4.png')), sprite_size))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_tiles, 'up_sprite_5.png')), sprite_size))
         
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
