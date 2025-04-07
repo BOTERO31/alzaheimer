@@ -2,7 +2,9 @@
 import pygame
 import constantes  
 import os
-
+from player import Player
+from colisiones import Collisions
+import Camara
 # Inicializar todos los módulos necesarios de Pygame
 pygame.init()
 
@@ -13,79 +15,20 @@ pygame.display.set_caption("Supermarket Rush")
 # Colores y velocidad del personaje
 x = 100
 y = 100
-velocidad = 4
 
+collision_system = Collisions()
 #Join imagen
-ruta_sprite = "sprite"
 ruta_tiles = "tiles"
 
 #Imagen
 background = pygame.image.load(os.path.join(ruta_tiles, "tile.png"))
 
 # Clase del jugador con sprites y animación
-class Player(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y):
-        super().__init__()
-        self.sprites = []
-        self.is_animating = False
-        
-        # Escalar las imágenes al tamaño deseado
-        sprite_size = (120, 120)  # Cambia este tamaño según lo que necesites
-        
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite1.png')), sprite_size))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite2.png')), sprite_size))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite3.png')), sprite_size))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite4.png')), sprite_size))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join(ruta_sprite, 'grandpa_sprite5.png')), sprite_size))
-        
-        self.current_sprite = 0
-        self.image = self.sprites[self.current_sprite]
 
-        self.rect = self.image.get_rect()
-        self.rect.topleft = [pos_x, pos_y]
-        self.speed = 5
-        self.direction = pygame.math.Vector2()
-
-    def inputs(self, keys):
-        if keys[pygame.K_DOWN]:  # Movimiento hacia abajo
-            self.animate()
-            self.direction.y = 1
-        elif keys[pygame.K_UP]:  # Movimiento hacia arriba
-            self.animate()
-            self.direction.y = -1
-        else:
-            self.direction.y = 0
-        if keys[pygame.K_LEFT]:  # Movimiento hacia la izquierda
-            self.animate()
-            self.direction.x = -1
-        elif keys[pygame.K_RIGHT]:  # Movimiento hacia la derecha
-            self.animate()
-            self.direction.x = 1
-        else:
-            self.direction.x = 0
-
-    def move(self):
-        if self.direction.magnitude() != 0:
-            self.direction = self.direction.normalize()
-        self.rect.center += self.direction * self.speed
-
-    def animate(self):
-        self.is_animating = True
-
-    def update(self, speed, keys):
-        self.inputs(keys)
-        self.move()
-        if self.is_animating:
-            self.current_sprite += speed
-            if self.current_sprite >= len(self.sprites):
-                self.current_sprite = 0
-                self.is_animating = False
-            self.image = self.sprites[int(self.current_sprite)]
 
 # Inicializar jugador y grupo de sprites
-moving_sprites = pygame.sprite.Group()
-player_pos = Player(x, y)
-moving_sprites.add(player_pos)
+moving_sprites = collision_system.visible_sprites
+player = collision_system.player
 
 # Dibujar la cuadrícula
 def dibujar_grid():
@@ -99,8 +42,8 @@ reloj = pygame.time.Clock()
 
 while corriendo:
     keys = pygame.key.get_pressed()
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
             corriendo = False
 
     # Rellenar la ventana con el color de fondo
@@ -111,11 +54,15 @@ while corriendo:
     ventana.blit(background, (0,0))
 
     # Actualizar y dibujar el sprite animado del jugador
-    moving_sprites.update(0.1, keys)
+    player.update(4, keys)
+    moving_sprites.update(0.2, keys)
     moving_sprites.draw(ventana)
-
+    
+    
     # Actualizar la pantalla
     pygame.display.flip()
     reloj.tick(60)
 
 pygame.quit()
+
+

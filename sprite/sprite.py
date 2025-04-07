@@ -1,5 +1,5 @@
 import pygame
-
+import os
 
 pygame.init()
 
@@ -18,11 +18,11 @@ class player(pygame.sprite.Sprite):
         super().__init__()
         self.sprites = []
         self.is_animating = False
-        self.sprites.append(pygame.image.load('grandpa_sprite1.png'))
-        self.sprites.append(pygame.image.load('grandpa_sprite2.png'))
-        self.sprites.append(pygame.image.load('grandpa_sprite3.png'))
-        self.sprites.append(pygame.image.load('grandpa_sprite4.png'))
-        self.sprites.append(pygame.image.load('grandpa_sprite5.png'))
+        self.sprites.append(pygame.image.load(os.path.join('sprite', 'grandpa_sprite1.png')))
+        self.sprites.append(pygame.image.load(os.path.join('sprite', 'grandpa_sprite2.png')))
+        self.sprites.append(pygame.image.load(os.path.join('sprite', 'grandpa_sprite3.png')))
+        self.sprites.append(pygame.image.load(os.path.join('sprite', 'grandpa_sprite4.png')))
+        self.sprites.append(pygame.image.load(os.path.join('sprite', 'grandpa_sprite5.png')))
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
 
@@ -52,7 +52,7 @@ class player(pygame.sprite.Sprite):
     def move(self, speed):
         if self.direction.magnitude() != 0:
             self.direction = self.direction.normalize()
-        self.rect.center += self.direction * speed
+        
 
     def animate(self):
         self.is_animating  = True
