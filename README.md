@@ -6,7 +6,7 @@ Nombre de los integrantes del equipo.
 
 #De que trata el juego
 
-El videojuego se llama "Mind Maze: Supermarket Rush" y tiene como objetivo representar de manera interactiva los síntomas tempranos del Alzhéimer. La historia gira en torno a un anciano que entra a un supermercado para hacer compras, pero al poco tiempo comienza a sufrir un episodio de Alzhéimer. A medida que el jugador avanza, los síntomas empeoran y se simulan por medio de distintas mecánicas de juego como pérdida de memoria, inversión de controles o visión borrosa. El juego tiene dos posibles finales: salir con las compras antes de que los síntomas empeoren demasiado, o ser retirado del lugar para recibir asistencia.
+El juego es una experiencia que busca representar los efectos del Alzheimer a través de mecánicas de juego progresivas. La historias se desarrolla en un supermercado en donde el personaje sufre de un ataque de demencia y tiene que recolectar la lista de compras lo mas rapido, a medida que el jugador avanza, enfrenta mas desafíos como olvidar productos, ver borroso y perder el control de sus movimientos, reflejando la progresión de la enfermedad.
 
 #Dinámica del Juego 
 
@@ -17,3 +17,6 @@ En "Mind Maze: Supermarket Rush", el jugador toma el rol de un anciano que entra
 4. Controles invertidos: en etapas avanzadas del nivel, las flechas de dirección pueden invertirse, simulando la pérdida de coordinación motora o confusión mental.
 5. Visión borrosa o difusa: efectos visuales simulan la dificultad para enfocarse o reconocer objetos familiares.
 
+
+
+video: https://youtu.be/hMbWWcYjbQ0
