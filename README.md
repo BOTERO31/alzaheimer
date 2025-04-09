@@ -16,7 +16,9 @@ En "Mind Maze: Supermarket Rush", el jugador toma el rol de un anciano que entra
 3. Pérdida de memoria de corto plazo: el juego puede mostrar una lista breve de productos que desaparece al poco tiempo, y el jugador deberá recordarla.
 4. Controles invertidos: en etapas avanzadas del nivel, las flechas de dirección pueden invertirse, simulando la pérdida de coordinación motora o confusión mental.
 5. Visión borrosa o difusa: efectos visuales simulan la dificultad para enfocarse o reconocer objetos familiares.
-
+![image](https://github.com/user-attachments/assets/0fc3ecb8-d9a2-4749-b419-0d33393b475f)
+![image](https://github.com/user-attachments/assets/c0bf3b64-bb1d-4f89-b076-e08b3ae19dac)
+![image](https://github.com/user-attachments/assets/faf4dd1d-3414-4f4c-bf5e-9d73dcff44ee)
 
 
 video: https://youtu.be/hMbWWcYjbQ0
