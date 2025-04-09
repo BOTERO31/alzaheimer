@@ -26,4 +26,4 @@ class Collisions:
                     self.player = Player((x, y), self.obstacle_sprites)
                     self.visible_sprites.add(self.player)
                 elif col == 'i':
-                    Manzana((x, y), [self.visible_sprites, self.obstacle_sprites, self.items_sprites])
+                    Manzana((x, y), [self.visible_sprites, self.items_sprites])
