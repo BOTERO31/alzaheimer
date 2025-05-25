@@ -1,13 +1,15 @@
-import pygame
-from os.path import join
-from os import walk
+import pygame 
+import os
+
+#Base path
+BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # window setup
-WINDOW_WIDTH = 1200
-WINDOW_HEIGHT = 820
+WINDOW_WIDTH = 1280
+WINDOW_HEIGHT = 720
 
 # tile size
-TILE_SIZE = 40
+TILE_SIZE = 64
 
 # colors
 BLACK = (0, 0, 0)
