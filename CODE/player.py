@@ -53,10 +53,13 @@ class Player(pygame.sprite.Sprite):
                         surf = pygame.transform.scale(pygame.image.load(full_path).convert_alpha(), (125, 125))
                         self.frames[state].append(surf)
             
-    def input(self):
+    def input(self, invert_keys):
         keys = pygame.key.get_pressed()
         self.direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
         self.direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
+        if invert_keys:
+            self.direction.x = -self.direction.x
+            self.direction.y = -self.direction.y
         #self.direction = self.direction.normalize() if self.direction else self.direction
     
     def move(self, dt):
@@ -95,7 +98,7 @@ class Player(pygame.sprite.Sprite):
         self.frame_index = self.frame_index + 7 * dt if self.direction else 0
         self.image = self.frames[self.state][int(self.frame_index) % len(self.frames[self.state])]
     
-    def update(self, dt):
-        self.input()
+    def update(self, dt, invert_keys):
+        self.input(invert_keys)
         self.move(dt)
         self.animate(dt)

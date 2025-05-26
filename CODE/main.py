@@ -63,6 +63,7 @@ class Game():
         duracion = 60
         timer_started = False
         fuente = pygame.font.SysFont(None, 36)
+        invert_keys = False
         
         while self.running:
             # dt
@@ -78,9 +79,9 @@ class Game():
                     if not timer_started:
                         timer_started = True
                         ticks = pygame.time.get_ticks()
-            
+        
             # update
-            self.all_sprites.update(dt)
+            self.all_sprites.update(dt, invert_keys)
             
             # draw
             self.display_surface.fill('black')
@@ -98,7 +99,8 @@ class Game():
                 time_text = f"{minutes:01}:{seconds:02}"
                 text = fuente.render(time_text, True, (0, 0, 0))
                 self.display_surface.blit(text, (120, 60))
-
+                if remaining == 30:
+                    invert_keys = True
                 if remaining == 0:
                     self.running = False
             
