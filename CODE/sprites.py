@@ -1,4 +1,5 @@
 from settings import *
+import pygame
 
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, pos, surf, groups):
@@ -65,7 +66,7 @@ class Collectible(pygame.sprite.Sprite):
         # Marcar si debe ir en la capa superior, estos elementos siempre se van a dibujar enciama del resto
         self.top_layer = 'manzana' in self.name or 'zanahoria' in self.name or 'zanahoria' in self.name or 'cebolla' in self.name or 'pescado' in self.name
 
-    def update(self, dt):
+    def update(self, dt, invert_keys):
         for player in self.player_group:
             if self.hitbox.colliderect(player.hitbox_rect):
                 keys = pygame.key.get_pressed()

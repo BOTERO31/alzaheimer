@@ -58,7 +58,7 @@ class Game():
 
     def run(self):
         ticks = pygame.time.get_ticks()
-        duracion = 180
+        duracion = 40
         timer_started = False
         fuente = pygame.font.SysFont('Arial', 64, bold=True)
 
@@ -83,7 +83,8 @@ class Game():
                 remaining = duracion - seconds_passed
                 if remaining < 0:
                     remaining = 0
-
+                if remaining == 30:
+                    invert_keys = True
                 minutes = remaining // 60
                 seconds = remaining % 60
                 time_text = f"{minutes:01}:{seconds:02}"
