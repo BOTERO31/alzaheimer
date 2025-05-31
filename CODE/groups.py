@@ -34,6 +34,3 @@ class AllSprites(pygame.sprite.Group):
         for sprite in top_layer_sprites:
             offset_pos = sprite.rect.topleft + self.offset
             self.display_surface.blit(sprite.image, offset_pos)
-
-    
-    

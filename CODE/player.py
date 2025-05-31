@@ -10,12 +10,14 @@ class Player(pygame.sprite.Sprite):
         
         # Construir la ruta completa a la imagen
         image_path = os.path.join(BASE_PATH, 'IMAGES', 'player', 'down', '1.png')
-        
       
         # Cargar y escalar la imagen
         self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (125, 125))
         self.rect = self.image.get_rect(center = pos)
         self.hitbox_rect = self.rect.inflate(-65, -100)
+
+        #Inventarios de elementos recogidos
+        self.inventory = {}
         
         #try:
             # Debug: Imprimir información de posición y tamaño
@@ -28,10 +30,9 @@ class Player(pygame.sprite.Sprite):
             #self.image = pygame.Surface((125, 125))
             #self.image.fill((255, 0, 0))
         
-        
         # movement
         self.direction = pygame.Vector2()
-        self.speed = 100  
+        self.speed = 150  
         self.collision_sprites = collision_sprites
         
     def load_images(self):
@@ -51,19 +52,14 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         self.direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
         self.direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
-        #self.direction = self.direction.normalize() if self.direction else self.direction
-    
+        self.direction = self.direction.normalize() if self.direction else self.direction
+
     def move(self, dt):
         
         self.hitbox_rect.x += self.direction.x * self.speed * dt
         self.collisions('horizontal')
         self.hitbox_rect.y += self.direction.y * self.speed * dt
         self.collisions('vertical')
-        
-        self.rect.center = self.hitbox_rect.center
-        
-        # Mantener al jugador dentro de los límites del mapa
-        #self.rect.clamp_ip(pygame.Rect(0, 0, 2048, 2048))  # Ajustar estos valores según el tamaño del mapa
         self.rect.center = self.hitbox_rect.center 
 
     def collisions(self, direction):
@@ -96,7 +92,6 @@ class Player(pygame.sprite.Sprite):
         self.frame_index = self.frame_index + 7 * dt if self.direction else 0
         if self.frames[self.state]:
             self.image = self.frames[self.state][int(self.frame_index) % len(self.frames[self.state])]
-
     
     def update(self, dt):
         self.input()

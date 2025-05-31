@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="238">
- <tileset firstgid="1" name="objetos" tilewidth="383" tileheight="248" tilecount="6" columns="0">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="331">
+ <tileset firstgid="1" name="objetos" tilewidth="867" tileheight="1155" tilecount="8" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image source="../graphics/objects/shelf1.png" width="192" height="132"/>
@@ -20,43 +20,49 @@
   <tile id="5">
    <image source="../graphics/objects/checkout.png" width="383" height="248"/>
   </tile>
+  <tile id="6">
+   <image source="../graphics/objects/shelf6_bread.png" width="867" height="1137"/>
+  </tile>
+  <tile id="7">
+   <image source="../graphics/objects/shelf7_ice.png" width="863" height="1155"/>
+  </tile>
  </tileset>
- <tileset firstgid="7" source="../tilesets/store_ground.tsx"/>
- <tileset firstgid="127" source="../tilesets/collectibles.tsx"/>
+ <tileset firstgid="9" source="../tilesets/store_ground.tsx"/>
+ <tileset firstgid="129" source="../tilesets/collectibles.tsx"/>
  <layer id="1" name="Ground" width="32" height="32">
   <data encoding="csv">
-7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
-19,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,28,29,29,
-79,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,38,39,40,41,42,
-91,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,50,51,52,53,54,
-103,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,62,63,64,65,66,
-115,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,62,
-79,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,62,
-91,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,62,
-103,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,62,
-115,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,121,122,123,61,61,62,
-79,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-91,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-103,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-115,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-79,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-91,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-103,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-115,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-79,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-91,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-103,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-115,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-79,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-91,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-103,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-115,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-79,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-91,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-103,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-115,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-79,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,
-91,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61
+9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,
+21,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,30,31,31,
+81,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,40,41,42,43,44,
+93,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,52,53,54,55,56,
+105,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,64,65,66,67,68,
+117,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,64,
+81,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,64,
+93,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,64,
+105,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,64,
+117,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,123,124,125,63,63,64,
+81,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+93,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+105,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+117,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+81,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+93,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+105,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+117,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+81,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+93,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+105,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+117,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+81,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+93,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+105,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+117,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+81,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+93,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+105,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+117,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+81,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,
+93,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
@@ -91,17 +97,6 @@
   <object id="67" name="shelf3" gid="3" x="217" y="714" width="66" height="119"/>
   <object id="68" name="shelf2" gid="2" x="215" y="786" width="67" height="120"/>
   <object id="70" name="shelf4" gid="4" x="382.667" y="422" width="192" height="120"/>
-  <object id="73" name="shelf1" gid="2147483649" x="1476.5" y="862" width="192" height="132"/>
-  <object id="74" name="shelf4" gid="2147483652" x="1383.5" y="1066" width="192" height="120"/>
-  <object id="75" name="shelf4" gid="4" x="967.5" y="856" width="192" height="120"/>
-  <object id="76" name="shelf1" gid="1" x="1029.5" y="1068" width="192" height="132"/>
-  <object id="77" name="shelf2" gid="2147483650" x="965.5" y="925.333" width="67" height="120"/>
-  <object id="78" name="shelf3" gid="2147483651" x="966.5" y="994.667" width="66" height="119"/>
-  <object id="79" name="shelf2" gid="2147483650" x="963.5" y="1068" width="67" height="120"/>
-  <object id="80" name="shelf2" gid="2147483650" x="1575.5" y="1082" width="67" height="120"/>
-  <object id="81" name="shelf3" gid="2147483651" x="1576.5" y="1152" width="66" height="119"/>
-  <object id="82" name="shelf2" gid="2147483650" x="1577.5" y="1224" width="67" height="120"/>
-  <object id="83" name="shelf4" gid="2147483652" x="1284.83" y="860" width="192" height="120"/>
   <object id="84" name="shelf4" gid="4" x="1390.75" y="424" width="192" height="120"/>
   <object id="85" name="shelf1" gid="1" x="1384.75" y="632" width="192" height="132"/>
   <object id="86" name="shelf4" gid="4" x="1005.25" y="424" width="192" height="120"/>
@@ -111,49 +106,30 @@
   <object id="90" name="shelf2" gid="2147483650" x="1001.25" y="636" width="67" height="120"/>
   <object id="91" name="shelf4" gid="4" x="357.75" y="862" width="192" height="120"/>
   <object id="92" name="shelf1" gid="1" x="351.75" y="1070" width="192" height="132"/>
-  <object id="93" name="shelf1" gid="2147483649" x="948.25" y="1272" width="192" height="132"/>
-  <object id="94" name="shelf4" gid="2147483652" x="855.25" y="1476" width="192" height="120"/>
-  <object id="95" name="shelf2" gid="2147483650" x="1047.25" y="1492" width="67" height="120"/>
-  <object id="96" name="shelf3" gid="2147483651" x="1048.25" y="1562" width="66" height="119"/>
-  <object id="97" name="shelf2" gid="2147483650" x="1049.25" y="1634" width="67" height="120"/>
-  <object id="98" name="shelf4" gid="2147483652" x="756.58" y="1270" width="192" height="120"/>
-  <object id="99" name="shelf4" gid="4" x="430.125" y="1708" width="192" height="120"/>
-  <object id="100" name="shelf1" gid="1" x="492.125" y="1920" width="192" height="132"/>
-  <object id="101" name="shelf2" gid="2147483650" x="428.125" y="1777.33" width="67" height="120"/>
-  <object id="102" name="shelf3" gid="2147483651" x="429.125" y="1846.67" width="66" height="119"/>
-  <object id="103" name="shelf2" gid="2147483650" x="426.125" y="1920" width="67" height="120"/>
   <object id="104" name="shelf4" gid="4" x="467.875" y="1276" width="192" height="120"/>
   <object id="105" name="shelf1" gid="1" x="529.875" y="1488" width="192" height="132"/>
   <object id="106" name="shelf2" gid="2147483650" x="465.875" y="1345.33" width="67" height="120"/>
   <object id="107" name="shelf3" gid="2147483651" x="466.875" y="1414.67" width="66" height="119"/>
   <object id="108" name="shelf2" gid="2147483650" x="463.875" y="1488" width="67" height="120"/>
-  <object id="109" name="shelf4" gid="2147483652" x="1301.88" y="1714" width="192" height="120"/>
-  <object id="110" name="shelf1" gid="2147483649" x="1239.88" y="1926" width="192" height="132"/>
-  <object id="111" name="shelf2" gid="2" x="1428.88" y="1783.33" width="67" height="120"/>
-  <object id="112" name="shelf3" gid="3" x="1428.88" y="1852.67" width="66" height="119"/>
-  <object id="113" name="shelf2" gid="2" x="1430.88" y="1926" width="67" height="120"/>
-  <object id="114" name="shelf4" gid="2147483652" x="1264.13" y="1282" width="192" height="120"/>
-  <object id="115" name="shelf1" gid="2147483649" x="1202.13" y="1494" width="192" height="132"/>
-  <object id="116" name="shelf2" gid="2" x="1391.13" y="1351.33" width="67" height="120"/>
-  <object id="117" name="shelf3" gid="3" x="1391.13" y="1420.67" width="66" height="119"/>
-  <object id="118" name="shelf2" gid="2" x="1393.13" y="1494" width="67" height="120"/>
-  <object id="119" name="shelf4" gid="4" x="1581.13" y="1437" width="192" height="120"/>
-  <object id="120" name="shelf4" gid="4" x="1654.88" y="1671" width="192" height="120"/>
-  <object id="121" name="shelf1" gid="1" x="1648.88" y="1879" width="192" height="132"/>
   <object id="123" name="shelf4" gid="2147483652" x="177.125" y="1287" width="192" height="120"/>
   <object id="124" name="shelf1" gid="2147483649" x="183.125" y="1495" width="192" height="132"/>
-  <object id="125" name="shelf2" gid="2" x="218.5" y="1819.25" width="67" height="120"/>
-  <object id="126" name="shelf3" gid="3" x="218.5" y="1947.25" width="66" height="119"/>
-  <object id="127" name="shelf3" gid="3" x="218.5" y="1689.75" width="66" height="119"/>
-  <object id="128" name="shelf2" gid="2" x="810.5" y="1819.25" width="67" height="120"/>
-  <object id="129" name="shelf3" gid="3" x="810.5" y="1947.25" width="66" height="119"/>
-  <object id="130" name="shelf1" gid="3" x="810.5" y="1689.75" width="66" height="119"/>
-  <object id="133" name="shelf2" gid="2147483650" x="1855.5" y="845" width="67" height="120"/>
-  <object id="134" name="shelf1" gid="2147483651" x="1856.5" y="915" width="66" height="119"/>
-  <object id="135" name="shelf2" gid="2147483650" x="1855.5" y="987" width="67" height="120"/>
-  <object id="137" name="shelf3" gid="2147483651" x="1856" y="1052" width="66" height="119"/>
-  <object id="138" name="shelf2" gid="2147483650" x="1857" y="1124" width="67" height="120"/>
   <object id="141" name="checkout" gid="6" x="1667.67" y="616" width="383" height="248"/>
+  <object id="245" name="shelf6_bread" gid="7" x="196.576" y="1727.09" width="128.282" height="186.28"/>
+  <object id="247" name="shelf6_bread" gid="7" x="325.152" y="1727.61" width="128.281" height="186.28"/>
+  <object id="248" name="shelf6_bread" gid="7" x="454.385" y="1727.42" width="128.281" height="186.28"/>
+  <object id="257" name="shelf7_ice" gid="8" x="1537.75" y="1729.58" width="69.6667" height="95.6667"/>
+  <object id="258" name="shelf7_ice" gid="8" x="1607.25" y="1730.08" width="69.6667" height="95.6667"/>
+  <object id="259" name="shelf7_ice" gid="8" x="1676.58" y="1729.75" width="69.6667" height="95.6667"/>
+  <object id="260" name="shelf7_ice" gid="8" x="1541.75" y="1873.58" width="69.6667" height="95.6667"/>
+  <object id="261" name="shelf7_ice" gid="8" x="1611.25" y="1874.08" width="69.6667" height="95.6667"/>
+  <object id="262" name="shelf7_ice" gid="8" x="1680.58" y="1873.75" width="69.6667" height="95.6667"/>
+  <object id="277" name="shelf7_ice" gid="8" x="501.167" y="214.917" width="69.6667" height="95.6667"/>
+  <object id="319" name="shelf2" gid="2" x="1780.83" y="850.333" width="67" height="120"/>
+  <object id="320" name="shelf3" gid="3" x="1780.83" y="1049.67" width="66" height="119"/>
+  <object id="321" name="shelf2" gid="2" x="1780.17" y="1245.67" width="67" height="120"/>
+  <object id="322" name="shelf2" gid="2" x="1610.83" y="850.331" width="67" height="120"/>
+  <object id="323" name="shelf3" gid="3" x="1610.83" y="1049.67" width="66" height="119"/>
+  <object id="324" name="shelf2" gid="2" x="1610.17" y="1245.67" width="67" height="120"/>
  </objectgroup>
  <objectgroup id="4" name="Entities">
   <object id="71" name="Player" x="1654.95" y="269.86">
@@ -169,53 +145,72 @@
   <object id="140" x="2334" y="1402" height="4"/>
  </objectgroup>
  <objectgroup id="5" name="Collectibles">
-  <object id="144" name="galleta" gid="127" x="1691" y="580.667" width="33" height="30.3333"/>
-  <object id="146" name="leche" gid="128" x="1279.58" y="196.167" width="28.5833" height="32.4167"/>
-  <object id="147" name="leche" gid="128" x="1310.67" y="159.5" width="27.3333" height="31.6667"/>
-  <object id="153" name="manzana" gid="129" x="1396.92" y="539.424" width="36.1667" height="38.1667"/>
-  <object id="175" name="papas" gid="130" x="1391.01" y="451.197" width="53.5" height="65"/>
-  <object id="176" name="yogurt" gid="131" x="1431.83" y="156.833" width="20" height="22"/>
-  <object id="177" name="yogurt" gid="131" x="1411.67" y="157" width="20" height="22"/>
-  <object id="178" name="yogurt" gid="131" x="1452.33" y="156.667" width="20" height="22"/>
-  <object id="192" name="yogurt" gid="131" x="951.33" y="188.999" width="20" height="22"/>
-  <object id="193" name="yogurt" gid="131" x="931.17" y="189.166" width="20" height="22"/>
-  <object id="194" name="yogurt" gid="131" x="971.83" y="188.833" width="20" height="22"/>
-  <object id="195" name="yogurt" gid="131" x="827.83" y="154.999" width="20" height="22"/>
-  <object id="196" name="yogurt" gid="131" x="807.67" y="155.166" width="20" height="22"/>
-  <object id="197" name="yogurt" gid="131" x="848.33" y="154.833" width="20" height="22"/>
-  <object id="201" name="yogurt" gid="131" x="374.83" y="190.999" width="20" height="22"/>
-  <object id="202" name="yogurt" gid="131" x="354.67" y="191.166" width="20" height="22"/>
-  <object id="203" name="yogurt" gid="131" x="395.33" y="190.833" width="20" height="22"/>
-  <object id="204" name="leche" gid="128" x="862.288" y="193.625" width="28.5833" height="32.4167"/>
-  <object id="205" name="leche" gid="128" x="966.878" y="155.458" width="27.3333" height="31.6667"/>
-  <object id="206" name="leche" gid="128" x="286.288" y="193.125" width="28.5833" height="32.4167"/>
-  <object id="207" name="leche" gid="128" x="456.378" y="192.958" width="27.3333" height="31.6667"/>
-  <object id="208" name="manzana" gid="129" x="779.25" y="532.917" width="36.1667" height="38.1667"/>
-  <object id="209" name="manzana" gid="129" x="1080.58" y="534.25" width="36.1667" height="38.1667"/>
-  <object id="210" name="manzana" gid="129" x="1045.92" y="975.583" width="36.1667" height="38.1667"/>
-  <object id="211" name="manzana" gid="129" x="1624.58" y="767.583" width="36.1667" height="38.1667"/>
-  <object id="212" name="manzana" gid="129" x="787.25" y="967.583" width="36.1667" height="38.1667"/>
-  <object id="213" name="manzana" gid="129" x="364.583" y="974.25" width="36.1667" height="38.1667"/>
-  <object id="214" name="manzana" gid="129" x="324.583" y="1399.58" width="36.1667" height="38.1667"/>
-  <object id="215" name="manzana" gid="129" x="505.917" y="1826.25" width="36.1667" height="38.1667"/>
-  <object id="216" name="manzana" gid="129" x="1383.25" y="1830.25" width="36.1667" height="38.1667"/>
-  <object id="219" name="zanahoria" gid="132" x="1864.92" y="988.333" width="43.5" height="58"/>
-  <object id="220" name="zanahoria" gid="132" x="1867.58" y="845.667" width="43.5" height="58"/>
-  <object id="221" name="zanahoria" gid="132" x="1587.58" y="1089.67" width="43.5" height="58"/>
-  <object id="222" name="zanahoria" gid="132" x="231.583" y="1880.33" width="43.5" height="58"/>
-  <object id="223" name="zanahoria" gid="132" x="438.25" y="1784.33" width="43.5" height="58"/>
-  <object id="224" name="zanahoria" gid="132" x="38.25" y="1848.33" width="43.5" height="58"/>
-  <object id="226" name="zanahoria" gid="132" x="36.9167" y="1596.33" width="43.5" height="58"/>
-  <object id="227" name="zanahoria" gid="132" x="42.25" y="1072.33" width="43.5" height="58"/>
-  <object id="228" name="zanahoria" gid="132" x="231.583" y="649.667" width="43.5" height="58"/>
-  <object id="229" name="papas" gid="130" x="1865.25" y="1151.5" width="53.5" height="65"/>
-  <object id="230" name="papas" gid="130" x="1593.25" y="1472.83" width="53.5" height="65"/>
-  <object id="231" name="papas" gid="130" x="1434.58" y="1954.17" width="53.5" height="65"/>
-  <object id="232" name="papas" gid="130" x="225.25" y="1979.5" width="53.5" height="65"/>
-  <object id="233" name="papas" gid="130" x="822.583" y="1982.17" width="53.5" height="65"/>
-  <object id="234" name="papas" gid="130" x="190.583" y="1704.83" width="53.5" height="65"/>
-  <object id="235" name="papas" gid="130" x="213.25" y="158.167" width="53.5" height="65"/>
-  <object id="236" name="papas" gid="130" x="161.25" y="158.167" width="53.5" height="65"/>
-  <object id="237" name="papas" gid="130" x="107.917" y="156.833" width="53.5" height="65"/>
+  <object id="144" name="galleta" gid="129" x="1691" y="580.667" width="33" height="30.3333"/>
+  <object id="146" name="leche" gid="130" x="1279.58" y="196.167" width="28.5833" height="32.4167"/>
+  <object id="147" name="leche" gid="130" x="1310.67" y="159.5" width="27.3333" height="31.6667"/>
+  <object id="153" name="manzana" gid="131" x="1396.92" y="543.424" width="36.1667" height="38.1667"/>
+  <object id="175" name="papas" gid="132" x="1391.01" y="451.197" width="53.5" height="65"/>
+  <object id="176" name="yogurt" gid="133" x="1431.83" y="156.833" width="20" height="22"/>
+  <object id="177" name="yogurt" gid="133" x="1411.67" y="157" width="20" height="22"/>
+  <object id="178" name="yogurt" gid="133" x="1452.33" y="156.667" width="20" height="22"/>
+  <object id="192" name="yogurt" gid="133" x="951.33" y="188.999" width="20" height="22"/>
+  <object id="193" name="yogurt" gid="133" x="931.17" y="189.166" width="20" height="22"/>
+  <object id="194" name="yogurt" gid="133" x="971.83" y="188.833" width="20" height="22"/>
+  <object id="195" name="yogurt" gid="133" x="827.83" y="154.999" width="20" height="22"/>
+  <object id="196" name="yogurt" gid="133" x="807.67" y="155.166" width="20" height="22"/>
+  <object id="197" name="yogurt" gid="133" x="848.33" y="154.833" width="20" height="22"/>
+  <object id="201" name="yogurt" gid="133" x="374.83" y="190.999" width="20" height="22"/>
+  <object id="202" name="yogurt" gid="133" x="354.67" y="191.166" width="20" height="22"/>
+  <object id="203" name="yogurt" gid="133" x="395.33" y="190.833" width="20" height="22"/>
+  <object id="204" name="leche" gid="130" x="862.288" y="193.625" width="28.5833" height="32.4167"/>
+  <object id="205" name="leche" gid="130" x="966.878" y="155.458" width="27.3333" height="31.6667"/>
+  <object id="206" name="leche" gid="130" x="286.288" y="193.125" width="28.5833" height="32.4167"/>
+  <object id="207" name="leche" gid="130" x="456.378" y="192.958" width="27.3333" height="31.6667"/>
+  <object id="208" name="manzana" gid="131" x="780.583" y="539.584" width="36.1667" height="38.1667"/>
+  <object id="209" name="manzana" gid="131" x="1080.58" y="539.583" width="36.1667" height="38.1667"/>
+  <object id="212" name="manzana" gid="131" x="787.25" y="967.583" width="36.1667" height="38.1667"/>
+  <object id="213" name="manzana" gid="131" x="364.583" y="974.25" width="36.1667" height="38.1667"/>
+  <object id="214" name="manzana" gid="131" x="324.583" y="1399.58" width="36.1667" height="38.1667"/>
+  <object id="224" name="zanahoria" gid="134" x="38.25" y="1848.33" width="43.5" height="58"/>
+  <object id="226" name="zanahoria" gid="134" x="36.9167" y="1596.33" width="43.5" height="58"/>
+  <object id="227" name="zanahoria" gid="134" x="42.25" y="1072.33" width="43.5" height="58"/>
+  <object id="228" name="zanahoria" gid="134" x="231.583" y="649.667" width="43.5" height="58"/>
+  <object id="235" name="papas" gid="132" x="213.25" y="158.167" width="53.5" height="65"/>
+  <object id="236" name="papas" gid="132" x="161.25" y="158.167" width="53.5" height="65"/>
+  <object id="237" name="papas" gid="132" x="107.917" y="156.833" width="53.5" height="65"/>
+  <object id="242" name="cebolla" gid="136" x="1472.33" y="335" width="32.3333" height="38.6667"/>
+  <object id="243" name="cebolla" gid="136" x="1090.5" y="328.667" width="32.3333" height="38.6667"/>
+  <object id="244" name="cebolla" gid="136" x="733.833" y="546.667" width="32.3333" height="38.6667"/>
+  <object id="269" name="pescado" gid="140" x="1693" y="1656.5" width="40.5" height="33.5"/>
+  <object id="270" name="pescado" gid="140" x="1623.25" y="1656.25" width="40.5" height="33.5"/>
+  <object id="271" name="pescado" gid="140" x="1554.25" y="1654.25" width="40.5" height="33.5"/>
+  <object id="272" name="pescado" gid="140" x="1697.75" y="1796.25" width="40.5" height="33.5"/>
+  <object id="273" name="pescado" gid="140" x="1625.75" y="1797.25" width="40.5" height="33.5"/>
+  <object id="274" name="pescado" gid="140" x="1557.75" y="1794.25" width="40.5" height="33.5"/>
+  <object id="279" name="pescado" gid="140" x="517.75" y="136.583" width="40.5" height="33.5"/>
+  <object id="282" name="queso" gid="141" x="210.833" y="1659.33" width="31.6667" height="31.3333"/>
+  <object id="284" name="pan" gid="139" x="539.667" y="1702.58" width="30" height="29.5"/>
+  <object id="285" name="pan" gid="139" x="510.333" y="1702.58" width="30" height="29.5"/>
+  <object id="286" name="pan" gid="139" x="482.666" y="1703.13" width="30" height="29.5"/>
+  <object id="287" name="pan" gid="2147483787" x="406" y="1659.37" width="30" height="29.5"/>
+  <object id="288" name="pan" gid="2147483787" x="375.667" y="1658.58" width="30" height="29.5"/>
+  <object id="289" name="pan" gid="2147483787" x="343.667" y="1656.58" width="30" height="29.5"/>
+  <object id="290" name="pan" gid="2147483787" x="278.833" y="1703.31" width="30" height="29.5"/>
+  <object id="291" name="pan" gid="2147483787" x="248.5" y="1702.52" width="30" height="29.5"/>
+  <object id="292" name="pan" gid="2147483787" x="216.5" y="1700.52" width="30" height="29.5"/>
+  <object id="293" name="queso" gid="141" x="266.167" y="1657.67" width="31.6667" height="31.3333"/>
+  <object id="294" name="queso" gid="141" x="375.5" y="1703.67" width="31.6667" height="31.3333"/>
+  <object id="295" name="queso" gid="141" x="507.5" y="1657" width="31.6667" height="31.3333"/>
+  <object id="296" name="cebolla" gid="136" x="702.667" y="560" width="33" height="35.3334"/>
+  <object id="298" name="manzana" gid="131" x="795.417" y="564.417" width="36.1667" height="38.1667"/>
+  <object id="300" name="cebolla" gid="136" x="378.75" y="550.333" width="32.3333" height="38.6667"/>
+  <object id="301" name="cebolla" gid="136" x="347.584" y="563.666" width="33" height="35.3334"/>
+  <object id="302" name="cebolla" gid="136" x="480.083" y="341.667" width="32.3333" height="38.6667"/>
+  <object id="303" name="cebolla" gid="136" x="448.917" y="355" width="33" height="35.3334"/>
+  <object id="304" name="cola" gid="137" x="1817.25" y="581.75" width="15.25" height="35.75"/>
+  <object id="327" name="zanahoria" gid="134" x="1798.25" y="976.333" width="43.5" height="58"/>
+  <object id="328" name="zanahoria" gid="2147483782" x="1615.58" y="985.667" width="43.5" height="58"/>
+  <object id="329" name="zanahoria" gid="134" x="1640.92" y="996.333" width="43.5" height="58"/>
+  <object id="330" name="zanahoria" gid="2147483782" x="1779.58" y="995" width="43.5" height="58"/>
  </objectgroup>
 </map>
