@@ -66,7 +66,8 @@ class Collectible(pygame.sprite.Sprite):
         # Marcar si debe ir en la capa superior, estos elementos siempre se van a dibujar enciama del resto
         self.top_layer = 'manzana' in self.name or 'zanahoria' in self.name or 'zanahoria' in self.name or 'cebolla' in self.name or 'pescado' in self.name
 
-    def update(self, dt, invert_keys):
+    def update(self, dt, invert_keys, remaining):
+
         for player in self.player_group:
             if self.hitbox.colliderect(player.hitbox_rect):
                 keys = pygame.key.get_pressed()
@@ -83,9 +84,14 @@ class Collectible(pygame.sprite.Sprite):
                     #Verifica los elementos recogidos con la lista creada aleatoria en "list"
                     if self.objetivos and self.name in self.objetivos:
                         self.objetivos[self.name] -=1 #Le resta el elemento si se recoge
+                        
+                        player.puntos += (player.inventory[self.name] * 100)
+                        
+                        if remaining > 0 :
+                            player.puntos = player.puntos                  
                         if self.objetivos[self.name] <= 0: #Cuando la lista llega a 0 o menos, la mantiene en 0
                             self.objetivos[self.name] = 0 
                             #Este es el valor que lee en 'completado = cantidad == 0' de "list"
-
+                        print("puntos", player.puntos)
                         print(f"Objetivos restantes: {self.objetivos}")
                     self.kill()  # Eliminar el ítem

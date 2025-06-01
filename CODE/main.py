@@ -4,7 +4,7 @@ from sprites import *
 from pytmx.util_pygame import load_pygame
 from groups import AllSprites
 from list import load_collectibles, draw_objectives
-
+from alusinacion import confusion
 class Game():
     def __init__(self):
         # setup
@@ -23,6 +23,7 @@ class Game():
         self.collision_sprite = pygame.sprite.Group()
 
         # setup
+        self.remaining = 40
         self.setup()
 
     def setup(self):
@@ -49,7 +50,7 @@ class Game():
 
         for marker in map.get_layer_by_name('Entities'):
             if marker.name == 'Player':
-                self.player = Player((marker.x, marker.y), self.all_sprites, self.collision_sprite)
+                self.player = Player((marker.x, marker.y), self.all_sprites, self.collision_sprite, self.remaining)
 
         #Creo un nuevo grupo de objetos recolectables
         self.collectible_group = pygame.sprite.Group()
@@ -57,14 +58,18 @@ class Game():
         self.lista_objetivo = load_collectibles(map, self.player, self.all_sprites, self.collectible_group)
 
     def run(self):
-        ticks = pygame.time.get_ticks()
-        duracion = 40
+        print("remaining", self.remaining)
+        
         timer_started = False
-        fuente = pygame.font.SysFont('Arial', 64, bold=True)
-
+        fuente = pygame.font.SysFont('Arial', 34, bold=True)
+        invert_keys = False
+        
+        ticks = pygame.time.get_ticks()
         while self.running:
-            dt = self.clock.tick() / 1000
-
+            duracion = 40
+            seconds_passed = (pygame.time.get_ticks() - ticks) // 1000
+            self.remaining = duracion - seconds_passed
+            dt = self.clock.tick() / 500
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
@@ -74,25 +79,31 @@ class Game():
                         timer_started = True
                         ticks = pygame.time.get_ticks()
 
-            self.all_sprites.update(dt)
+            self.all_sprites.update(dt, invert_keys, self.remaining)
             self.all_sprites.draw(self.player.rect.center)
             draw_objectives(self.display_surface, self.hoja_objetivos, self.lista_objetivo)
-
+            
+            puntos_text = (f"{self.player.puntos}")
+            text = fuente.render(puntos_text, True, (255, 255, 255))
+            text_rect = text.get_rect(center=( 1200, 60))
+            self.display_surface.blit(text, text_rect)
             if timer_started:
-                seconds_passed = (pygame.time.get_ticks() - ticks) // 1000
-                remaining = duracion - seconds_passed
-                if remaining < 0:
-                    remaining = 0
-                if remaining == 30:
+                
+                
+                if self.remaining < 0:
+                    self.remaining = 0
+                if self.remaining == 30:
                     invert_keys = True
-                minutes = remaining // 60
-                seconds = remaining % 60
+                if self.remaining == 30:
+                    alusinacion()
+                minutes = self.remaining // 60
+                seconds = self.remaining % 60
                 time_text = f"{minutes:01}:{seconds:02}"
                 text = fuente.render(time_text, True, (255, 255, 255))
                 text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, 60))
                 self.display_surface.blit(text, text_rect)
 
-                if remaining == 0:
+                if self.remaining == 0:
                     self.running = False
 
             pygame.display.flip()
