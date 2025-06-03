@@ -1,42 +1,67 @@
 import pygame
 import random
 import math
+import settings
+import time
 
-def confusion():
+# Lista para almacenar las figuras activas
+active_shapes = []
+
+class Shape:
+    def __init__(self, x, y, size, color, shape_type):
+        self.x = x
+        self.y = y
+        self.size = size
+        self.color = color  # (r,g,b,alpha)
+        self.shape_type = shape_type
+        self.creation_time = time.time()
+        self.lifetime = 3.0  # 3 segundos de vida
+
+def create_shape():
     r = random.randint(0,255)
     g = random.randint(0,255)
     b = random.randint(0,255)
-    alpha = random.randint(50,200)  # Valor de transparencia (0-255)
+    alpha = 200  # Comienza completamente visible
 
-    x = random.randint(0,WINDOW_WIDTH)
-    y = random.randint(0,WINDOW_HEIGHT)
-    size = random.randint(10, 80)
+    x = random.randint(0,settings.WINDOW_WIDTH)
+    y = random.randint(0,settings.WINDOW_HEIGHT)
+    size = random.randint(50, 150)
     
-    figures = ["circle", "rect", "triangle", "star", "hexagon"]
-    figure = random.randint(figures[0], len(figures))
+    figures = ["circle", "rect"]
+    figure = random.choice(figures)
     
-    # Crear una superficie con transparencia
-    surface = pygame.Surface((size*2, size*2), pygame.SRCALPHA)
+    return Shape(x, y, size, (r,g,b,alpha), figure)
+
+def draw_shape(window, shape):
+    # Calcular ls trsnsparencia(alpha) basado en el tiempo transcurrido
+    elapsed_time = time.time() - shape.creation_time
+    if elapsed_time >= shape.lifetime:
+        return False  # se elimina
     
-    if figure == "circle":
-        pygame.draw.circle(surface, (r,g,b,alpha), (size,size), size)
-    elif figure == "rect":
-        pygame.draw.rect(surface, (r,g,b,alpha), (0,0,size*2,size*2))
-    elif figure == "triangle":
-        points = [(size,0), (0,size*2), (size*2,size*2)]
-        pygame.draw.polygon(surface, (r,g,b,alpha), points)
-    elif figure == "star":
-        points = []
-        for i in range(10):
-            angle = i * 36 * 3.14159 / 180
-            radius = size if i % 2 == 0 else size/2
-            points.append((size + radius * math.cos(angle), size + radius * math.sin(angle)))
-        pygame.draw.polygon(surface, (r,g,b,alpha), points)
-    elif figure == "hexagon":
-        points = []
-        for i in range(6):
-            angle = i * 60 * 3.14159 / 180
-            points.append((size + size * math.cos(angle), size + size * math.sin(angle)))
-        pygame.draw.polygon(surface, (r,g,b,alpha), points)
+    # Calcular el nuevo alpha (se desvanece linealmente)
+    fade_progress = elapsed_time / shape.lifetime
+    new_alpha = int(255 * (1 - fade_progress))
     
-    window.blit(surface, (x-size, y-size))
+    # Crear superficie con el nuevo alpha
+    surface = pygame.Surface((shape.size*2, shape.size*2), pygame.SRCALPHA)
+    r, g, b, _ = shape.color
+    new_color = (r, g, b, new_alpha)
+    
+    # Dibujar la forma
+    if shape.shape_type == "circle":
+        pygame.draw.circle(surface, new_color, (shape.size,shape.size), shape.size)
+    elif shape.shape_type == "rect":
+        pygame.draw.rect(surface, new_color, (0,0,shape.size*2,shape.size*2))
+    
+    window.blit(surface, (shape.x-shape.size, shape.y-shape.size))
+    return True  # La forma sigue activa
+
+def confusion(window):
+    global active_shapes
+    
+    # Crear una nueva forma cada cierto tiempo
+    if random.random() < 0.1:  # 10% de probabilidad cada frame
+        active_shapes.append(create_shape())
+    
+    # Actualizar y dibujar todas las formas activas
+    active_shapes = [shape for shape in active_shapes if draw_shape(window, shape)]

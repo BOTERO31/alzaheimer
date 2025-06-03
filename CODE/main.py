@@ -66,7 +66,7 @@ class Game():
         
         ticks = pygame.time.get_ticks()
         while self.running:
-            duracion = 40
+            duracion = 180
             seconds_passed = (pygame.time.get_ticks() - ticks) // 1000
             self.remaining = duracion - seconds_passed
             dt = self.clock.tick() / 500
@@ -81,21 +81,22 @@ class Game():
 
             self.all_sprites.update(dt, invert_keys, self.remaining)
             self.all_sprites.draw(self.player.rect.center)
-            draw_objectives(self.display_surface, self.hoja_objetivos, self.lista_objetivo)
             
+            # mostrar contador de puntos
             puntos_text = (f"{self.player.puntos}")
             text = fuente.render(puntos_text, True, (255, 255, 255))
             text_rect = text.get_rect(center=( 1200, 60))
             self.display_surface.blit(text, text_rect)
+
             if timer_started:
                 
                 
                 if self.remaining < 0:
                     self.remaining = 0
-                if self.remaining == 30:
+                if self.remaining == 60:
                     invert_keys = True
-                if self.remaining == 30:
-                    alusinacion()
+                if self.remaining < 30:
+                    confusion(self.display_surface)
                 minutes = self.remaining // 60
                 seconds = self.remaining % 60
                 time_text = f"{minutes:01}:{seconds:02}"
@@ -105,7 +106,35 @@ class Game():
 
                 if self.remaining == 0:
                     self.running = False
+            draw_objectives(self.display_surface, self.hoja_objetivos, self.lista_objetivo)
+            keys = pygame.key.get_pressed()
+            if all(valor == 0 for valor in self.lista_objetivo.values()):
+                self.display_surface.fill(BLACK)
+                #cambiar esto
+                final_text = final_text =f""" Has ganado
+                                    Tiempo: {duracion - self.remaining}
+                                    PUNTUACION: {self.player.puntos}
+                                    Esc para salir"""
+                
+                text = fuente.render(final_text, True, (255, 255, 255))
+                text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+                self.display_surface.blit(text, text_rect)
 
+            else:
+
+                if all(valor > 0 for valor in self.lista_objetivo.values()) and self.remaining == 0:
+                    self.display_surface.fill(BLACK)
+                        #cambiar esto
+                    final_text =f""" Has perdido
+                                Tiempo: {duracion - self.remaining}
+                                PUNTUACION: {self.player.puntos}
+                                Esc para salir"""
+        
+                    text = fuente.render(final_text, True, (255, 255, 255))
+                    text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+                    self.display_surface.blit(text, text_rect)
+            if keys[pygame.K_ESCAPE]:
+                    self.running = False
             pygame.display.flip()
         pygame.quit()
 

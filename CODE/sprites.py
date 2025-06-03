@@ -85,6 +85,7 @@ class Collectible(pygame.sprite.Sprite):
                     if self.objetivos and self.name in self.objetivos:
                         self.objetivos[self.name] -=1 #Le resta el elemento si se recoge
                         
+                        #Logica del contador de puntos
                         player.puntos += (player.inventory[self.name] * 100)
                         
                         if remaining > 0 :
