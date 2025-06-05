@@ -21,10 +21,46 @@ class CollisionSprite(Sprite):
             self.image = pygame.transform.scale(surf, (128.28, 186.28))  #Al de los panes le cambio el tamaño para que coincida con el del tiled_map
             self.rect = self.image.get_rect(topleft=pos)
             self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
-        elif self.name == 'shelf7_ice':
+        elif self.name == 'milk':
+            self.image = pygame.transform.scale(surf, (133.86, 182.97)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
+        elif self.name == 'fish':
             self.image = pygame.transform.scale(surf, (69.67, 95.67))  #Al del hielo le cambio el tamaño para que coincida con el del tiled_map
             self.rect = self.image.get_rect(topleft=pos)
             self.hitbox = self.rect.inflate(-10, -10)
+        elif self.name == 'meat':
+            self.image = pygame.transform.scale(surf, (69.00, 94.67))
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -10)
+        elif self.name == 'ice':
+            self.image = pygame.transform.scale(surf, (207.00, 98.00))
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -10)
+        elif self.name == 'cake':
+            self.image = pygame.transform.scale(surf, (183.08, 143.12))
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -10)
+        elif self.name == 'sit':
+            self.image = pygame.transform.scale(surf, (164.43, 117.23)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -50)  # Ajusta colisión
+        elif self.name == 'shelf2_1' or self.name == 'shelf2_2' or self.name == 'shelf2_3' or self.name == 'shelf2_4':
+            self.image = pygame.transform.scale(surf, (73.38, 235.71)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -90)  # Ajusta colisión
+        elif self.name == 'mini_shelf5':
+            self.image = pygame.transform.scale(surf, (169.00, 159.00)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
+        elif self.name == 'drinks':
+            self.image = pygame.transform.scale(surf, (99.00, 195.00)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
+        elif self.name == 'beauty':
+            self.image = pygame.transform.scale(surf, (164.00, 240.00)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
         else:
             self.hitbox = self.rect.inflate(-10, -10) #Sino estos son los valores para el resto de los objetos
 

@@ -66,7 +66,7 @@ class Game():
         
         ticks = pygame.time.get_ticks()
         while self.running:
-            duracion = 180
+            duracion = 90
             seconds_passed = (pygame.time.get_ticks() - ticks) // 1000
             self.remaining = duracion - seconds_passed
             dt = self.clock.tick() / 500
@@ -93,7 +93,7 @@ class Game():
                 
                 if self.remaining < 0:
                     self.remaining = 0
-                if self.remaining == 60:
+                if self.remaining < 60 and self.remaining > 15:
                     invert_keys = True
                 if self.remaining < 30:
                     confusion(self.display_surface)
