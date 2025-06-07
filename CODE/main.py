@@ -89,8 +89,6 @@ class Game():
             self.display_surface.blit(text, text_rect)
 
             if timer_started:
-                
-                
                 if self.remaining < 0:
                     self.remaining = 0
                 if self.remaining < 60 and self.remaining > 15:

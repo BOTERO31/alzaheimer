@@ -87,7 +87,14 @@ class Collectible(pygame.sprite.Sprite):
             'cebolla': (33.00, 35.33),
             'pescado': (40.50, 33.50),
             'pan': (30.00, 29.50),
-            'queso': (31.67, 31.33)
+            'queso': (31.67, 31.33),
+            'carne': (32.67, 29.00),
+            'agua': (14.00, 30.00),
+            'arroz': (26.83, 35.00),
+            'harina': (24.50, 34.00),
+            'frijol': (31.67, 33.67),
+            'helado': (28.50, 36.50),
+            'chips': (30.17, 34.50)
         }
 
         # Obtener el tamaño adecuado si el nombre coincide
@@ -100,7 +107,7 @@ class Collectible(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(70, 80)#Valores para ser recogido a distancia
 
         # Marcar si debe ir en la capa superior, estos elementos siempre se van a dibujar enciama del resto
-        self.top_layer = 'manzana' in self.name or 'zanahoria' in self.name or 'zanahoria' in self.name or 'cebolla' in self.name or 'pescado' in self.name
+        self.top_layer = 'manzana' in self.name or 'zanahoria' in self.name or 'zanahoria' in self.name or 'cebolla' in self.name or 'pescado' in self.name or 'helado' in self.name or 'carne' in self.name
 
     def update(self, dt, invert_keys, remaining):
 
