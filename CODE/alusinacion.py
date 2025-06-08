@@ -15,8 +15,8 @@ class Shape:
         self.color = color  # (r,g,b,alpha)
         self.shape_type = shape_type
         self.creation_time = time.time()
-        self.lifetime = 3.0  # 3 segundos de vida
-
+        self.lifetime = 3.0  # 3 segundos de duración
+        
 def create_shape():
     r = random.randint(0,255)
     g = random.randint(0,255)
