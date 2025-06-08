@@ -21,10 +21,46 @@ class CollisionSprite(Sprite):
             self.image = pygame.transform.scale(surf, (128.28, 186.28))  #Al de los panes le cambio el tamaño para que coincida con el del tiled_map
             self.rect = self.image.get_rect(topleft=pos)
             self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
-        elif self.name == 'shelf7_ice':
+        elif self.name == 'milk':
+            self.image = pygame.transform.scale(surf, (133.86, 182.97)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
+        elif self.name == 'fish':
             self.image = pygame.transform.scale(surf, (69.67, 95.67))  #Al del hielo le cambio el tamaño para que coincida con el del tiled_map
             self.rect = self.image.get_rect(topleft=pos)
             self.hitbox = self.rect.inflate(-10, -10)
+        elif self.name == 'meat':
+            self.image = pygame.transform.scale(surf, (69.00, 94.67))
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -10)
+        elif self.name == 'ice':
+            self.image = pygame.transform.scale(surf, (207.00, 98.00))
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -10)
+        elif self.name == 'cake':
+            self.image = pygame.transform.scale(surf, (183.08, 143.12))
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -10)
+        elif self.name == 'sit':
+            self.image = pygame.transform.scale(surf, (164.43, 117.23)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -50)  # Ajusta colisión
+        elif self.name == 'shelf2_1' or self.name == 'shelf2_2' or self.name == 'shelf2_3' or self.name == 'shelf2_4':
+            self.image = pygame.transform.scale(surf, (73.38, 235.71)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -90)  # Ajusta colisión
+        elif self.name == 'mini_shelf5':
+            self.image = pygame.transform.scale(surf, (169.00, 159.00)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
+        elif self.name == 'drinks':
+            self.image = pygame.transform.scale(surf, (99.00, 195.00)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
+        elif self.name == 'beauty':
+            self.image = pygame.transform.scale(surf, (164.00, 240.00)) 
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox = self.rect.inflate(-10, -70)  # Ajusta colisión
         else:
             self.hitbox = self.rect.inflate(-10, -10) #Sino estos son los valores para el resto de los objetos
 
@@ -51,7 +87,14 @@ class Collectible(pygame.sprite.Sprite):
             'cebolla': (33.00, 35.33),
             'pescado': (40.50, 33.50),
             'pan': (30.00, 29.50),
-            'queso': (31.67, 31.33)
+            'queso': (31.67, 31.33),
+            'carne': (32.67, 29.00),
+            'agua': (14.00, 30.00),
+            'arroz': (26.83, 35.00),
+            'harina': (24.50, 34.00),
+            'frijol': (31.67, 33.67),
+            'helado': (28.50, 36.50),
+            'chips': (30.17, 34.50)
         }
 
         # Obtener el tamaño adecuado si el nombre coincide
@@ -64,7 +107,7 @@ class Collectible(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(70, 80)#Valores para ser recogido a distancia
 
         # Marcar si debe ir en la capa superior, estos elementos siempre se van a dibujar enciama del resto
-        self.top_layer = 'manzana' in self.name or 'zanahoria' in self.name or 'zanahoria' in self.name or 'cebolla' in self.name or 'pescado' in self.name
+        self.top_layer = 'manzana' in self.name or 'zanahoria' in self.name or 'zanahoria' in self.name or 'cebolla' in self.name or 'pescado' in self.name or 'helado' in self.name or 'carne' in self.name
 
     def update(self, dt, invert_keys, remaining):
 
