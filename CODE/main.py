@@ -11,11 +11,18 @@ class Game():
     def __init__(self):
         # setup
         pygame.init()
+        pygame.mixer.init()
+        pygame.mixer.set_num_channels(8)  # Configurar 8 canales
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption('Mind Maze: Supermarket Rush')
         self.clock = pygame.time.Clock()
         self.running = True
         self.duracion = 90
+        
+        # Configuración de canales de audio
+        self.music_channel = pygame.mixer.Channel(0)
+        self.ambient_channel = pygame.mixer.Channel(1)
+        self.effects_channel = pygame.mixer.Channel(2)
         
         # Inicializar sistema de puntuación
         self.puntuacion = Puntuacion()
@@ -29,7 +36,7 @@ class Game():
         self.collision_sprite = pygame.sprite.Group()
 
         # setup
-        self.remaining = 40
+        self.remaining = 90
         self.setup()
 
     def setup(self):
@@ -65,16 +72,17 @@ class Game():
 
     def run(self):
         print("remaining", self.remaining)
-        
+        self.synthom_sfx = pygame.mixer.Sound('AUDIO/synthom.wav')
         timer_started = False
         fuente = pygame.font.SysFont('Arial', 34, bold=True)
         invert_keys = False
         game_ended = False  # Nueva variable para controlar si el juego ha terminado
-        
-        ticks = pygame.time.get_ticks()
+        self.music = pygame.mixer.Sound('AUDIO/music.mp3')
+        self.ambientation = pygame.mixer.Sound('AUDIO/ambientation.mp3')
+        self.loose = pygame.mixer.Sound('AUDIO/loose.wav')
+        ticks = 0  # Inicializamos ticks en 0
         while self.running:
-            
-            if not game_ended:  # Solo actualizar el tiempo si el juego no ha terminado
+            if not (game_ended) and timer_started:  # Solo actualizar el tiempo si el juego no ha terminado y el timer ha iniciado
                 seconds_passed = (pygame.time.get_ticks() - ticks) // 1000
                 self.remaining = self.duracion - seconds_passed
             dt = self.clock.tick() / 500
@@ -85,8 +93,9 @@ class Game():
                 if event.type == pygame.KEYDOWN:
                     if not timer_started:
                         timer_started = True
-                        ticks = pygame.time.get_ticks()
+                        ticks = pygame.time.get_ticks()  # Iniciamos el contador cuando se presiona una tecla
 
+            
             self.all_sprites.update(dt, invert_keys, self.remaining)
             self.all_sprites.draw(self.player.rect.center)
             
@@ -141,16 +150,36 @@ class Game():
                 text_rect = text.get_rect(center=(WINDOW_WIDTH*0.5, WINDOW_HEIGHT*0.7))
                 self.display_surface.blit(text, text_rect)
             if timer_started:
+                #iniciar musica
+                if not self.music_channel.get_busy():
+                    self.music_channel.play(self.music, loops=-1)
+                    self.music_channel.set_volume(0.2)
+                
+                if not self.ambient_channel.get_busy():
+                    self.ambient_channel.play(self.ambientation, loops=-1)
+                    self.ambient_channel.set_volume(0.1)
+                
+                #contador minutos usados
                 self.t_usado = self.duracion - self.remaining
                 used_minutes = self.t_usado // 60
                 used_seconds = self.t_usado % 60
                 
                 if self.remaining < 0:
                     self.remaining = 0
+                if self.remaining == 60:
+                    self.effects_channel.play(self.synthom_sfx)
+                    self.effects_channel.set_volume(2.0)
                 if self.remaining < 60 and self.remaining > 15:
                     invert_keys = True
+                if self.remaining == 30:
+                    self.effects_channel.play(self.synthom_sfx)
+                    self.effects_channel.set_volume(2.0)
                 if self.remaining < 30:
                     confusion(self.display_surface)
+                if self.remaining == 8:
+                    self.effects_channel.play(self.loose)
+                    self.effects_channel.set_volume(1.0)
+                    
 
                 minutes = self.remaining // 60
                 seconds = self.remaining % 60
