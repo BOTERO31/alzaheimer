@@ -4,50 +4,47 @@ import random
 from sprites import Collectible
 from settings import BASE_PATH
 
-def load_collectibles(map, player, all_sprites_group, collectible_group):
+def load_collectibles(map, player, all_sprites, collectible_group):
     generated_items = {}
-    collectibles = map.get_layer_by_name('Collectibles')
 
-    # Primera pasada: contar y crear objetos
-    for obj in collectibles:
+    for obj in map.get_layer_by_name('Collectibles'):
         name = obj.name.lower()
-        generated_items[name] = generated_items.get(name, 0) + 1
+        if name in generated_items:
+            generated_items[name] += 1
+        else:
+            generated_items[name] = 1
 
+    # ✅ Mostrar ítems generados
+    print(f"Items generados: {generated_items}")
+
+    # Generar lista de objetivo aleatoria
     lista_objetivo = randomly_generated(generated_items)
+    print("Lista objetivo aleatoria:", lista_objetivo)
 
-    for obj in collectibles:
+    for obj in map.get_layer_by_name('Collectibles'):
         name = obj.name.lower()
         Collectible(
             (obj.x, obj.y), obj.image,
-            (all_sprites_group, collectible_group),
+            (all_sprites, collectible_group),
             player_group=pygame.sprite.GroupSingle(player),
             name=name,
             objetivos=lista_objetivo
         )
-
 
     return lista_objetivo
 
 #La funcion que crea la lista random
 def randomly_generated(generated_items):
     random_list = {}
-
-    # Obtener los nombres de los ítems generados
-    item_names = list(generated_items.keys())
-    random.shuffle(item_names)  # Mezcla aleatoria
-
-    # Elegir hasta 5 únicos, para que siempre tenga 5 items la lista
-    selected = item_names[:min(5, len(item_names))]
-
-    # Asignar cantidades aleatorias a los 5 items seleccionados
+    names = list(generated_items.keys())
+    sample_size = min(5, len(names))  # limitar a máximo 5
+    selected = random.sample(names, sample_size)
     for name in selected:
-        amount = generated_items[name]
-        random_amount = random.randint(1, amount)
-        random_list[name] = min(random_amount, amount)
+        random_list[name] = random.randint(1, min(generated_items[name], 5))
     return random_list
 
 #Funcion para dibujar todo en orden
-def draw_objectives(display_surface, hoja, lista_objetivo):
+def draw_objectives(lista_objetivo, display_surface, hoja, memoria):
     x, y = 20, 40
     #Dibuja la oja sobre las coordenas (x, y)
     display_surface.blit(hoja, (x, y))
@@ -73,21 +70,26 @@ def draw_objectives(display_surface, hoja, lista_objetivo):
 
     #Luego recorremos la lista objetivo dibujando los items
     for nombre, cantidad in lista_objetivo.items():
-        texto = f"{nombre}-{cantidad}"
+        if nombre in memoria.blur:
+            texto = f"{nombre}-?"
+            render = fuente_objetivo.render(texto, True, color_activo)
+
+            # Simular borrosidad con baja opacidad
+            alpha_surface = pygame.Surface(render.get_size(), pygame.SRCALPHA)
+            alpha_surface.blit(render, (0, 0))
+            alpha_surface.set_alpha(80)
+            display_surface.blit(alpha_surface, (text_x, text_y))
         
-        #Verifica si ya esta en 0 la cantidad para dibujarla del color antes de recoger o ya recogido
-        completado = cantidad == 0
-        color = color_completado if completado else color_activo
+        else:
+            texto = f"{nombre}-{cantidad}"
+            completado = cantidad == 0
+            color = color_completado if completado else color_activo
+            render = fuente_objetivo.render(texto, True, color)
+            display_surface.blit(render, (text_x, text_y))
 
-        #Carga el tipo de fuente y dibuja el texto
-        render = fuente_objetivo.render(texto, True, color)
-        display_surface.blit(render, (text_x, text_y))
+            if completado:
+                start = (text_x, text_y + render.get_height() // 2)
+                end = (text_x + render.get_width(), text_y + render.get_height() // 2)
+                pygame.draw.line(display_surface, color, start, end, 2)
 
-        #En caso de estar completado, este if calcula la mitad del texto y sobre esa mitad traza una linea
-        if completado:
-            start = (text_x, text_y + render.get_height() // 2) #Comienza la linea
-            end = (text_x + render.get_width(), text_y + render.get_height() // 2) #Termina la linea
-            pygame.draw.line(display_surface, color, start, end, 2)
-
-        #Espaciado entre un texto y el otro, para que coincida con los renglones de la imagen 'hoja'
         text_y += 22

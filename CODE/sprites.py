@@ -74,7 +74,9 @@ class Collectible(pygame.sprite.Sprite):
         self.objetivos = objetivos
         self.collected = False
         self.ground = False
-        self.collected_sfx = pygame.mixer.Sound('AUDIO/pick.mp3')
+        sound_path = os.path.join(BASE_PATH,'AUDIO', 'pick.mp3')
+        self.collected_sfx = pygame.mixer.Sound(sound_path)
+
 
         # Escalado personalizado según el nombre del ítem, para que cada item tenga el tamaño que tienen en el tiled_map
         size_map = {

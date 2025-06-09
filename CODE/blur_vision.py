@@ -17,43 +17,38 @@ class Shape:
         self.lifetime = 3.0  # 3 segundos de duración
         
 def create_shape():
-    r = random.randint(0,255)
-    g = random.randint(0,255)
-    b = random.randint(0,255)
-    alpha = 200  # Comienza completamente visible
+    gray = random.randint(180, 220)
+    alpha = random.randint(200, 250)  # Muy transparente
 
-    size = random.randint(50, 150)
+    size = random.randint(80, 180)  # Tamaño más grande
     x = random.randint(0, settings.WINDOW_WIDTH - size)
     y = random.randint(0, settings.WINDOW_HEIGHT - size)
     
-    figures = ["circle", "rect"]
-    figure = random.choice(figures)
+    figure = random.choice(["circle", "rect"])
     
-    return Shape(x, y, size, (r,g,b,alpha), figure)
+    return Shape(x, y, size, (gray, gray, gray, alpha), figure)
 
 def draw_shape(window, shape):
-    # Calcular ls trsnsparencia(alpha) basado en el tiempo transcurrido
     elapsed_time = time.time() - shape.creation_time
     if elapsed_time >= shape.lifetime:
-        return False  # se elimina
-    
-    # Calcular el nuevo alpha (se desvanece linealmente)
+        return False
+
+    # Mantener el alpha original hasta que desaparezca
     fade_progress = elapsed_time / shape.lifetime
-    new_alpha = max(0, int(255 * (1 - fade_progress)))
-    
-    # Crear superficie con el nuevo alpha
+    r, g, b, alpha = shape.color
+    new_alpha = int(alpha * (1 - fade_progress))  # más tenue pero no se vuelve invisible al instante
+
     surface = pygame.Surface((shape.size*2, shape.size*2), pygame.SRCALPHA)
-    r, g, b, _ = shape.color
+    surface.fill((0, 0, 0, 0))  # Fondo transparente
     new_color = (r, g, b, new_alpha)
-    
-    # Dibujar la forma
+
     if shape.shape_type == "circle":
-        pygame.draw.circle(surface, new_color, (shape.size,shape.size), shape.size)
+        pygame.draw.circle(surface, new_color, (shape.size, shape.size), shape.size)
     elif shape.shape_type == "rect":
-        pygame.draw.rect(surface, new_color, (0,0,shape.size*2,shape.size*2))
-    
-    window.blit(surface, (shape.x-shape.size, shape.y-shape.size))
-    return True  # La forma sigue activa
+        pygame.draw.ellipse(surface, new_color, (0, 0, shape.size*2, shape.size*2))  # ovalo en vez de cuadrado
+
+    window.blit(surface, (shape.x - shape.size, shape.y - shape.size))
+    return True
 
 def confusion(window):
     global active_shapes

@@ -4,8 +4,10 @@ from sprites import *
 from pytmx.util_pygame import load_pygame
 from groups import AllSprites
 from list import load_collectibles, draw_objectives
-from alusinacion import confusion
+from blur_vision import confusion
 from puntuacion import Puntuacion
+from memory_lost import MemoryLossManager
+
 
 class Game():
     def __init__(self):
@@ -18,6 +20,9 @@ class Game():
         self.clock = pygame.time.Clock()
         self.running = True
         self.duracion = 90
+
+        #Perdida de memoria
+        self.memory_loss_manager = MemoryLossManager(intervalo=20)
         
         # Configuración de canales de audio
         self.music_channel = pygame.mixer.Channel(0)
@@ -36,7 +41,7 @@ class Game():
         self.collision_sprite = pygame.sprite.Group()
 
         # setup
-        self.remaining = 0
+        self.remaining = 120
         self.setup()
 
     def setup(self):
@@ -72,14 +77,22 @@ class Game():
 
     def run(self):
         print("remaining", self.remaining)
-        self.synthom_sfx = pygame.mixer.Sound('AUDIO/synthom.wav')
+        sound_path_synthom = os.path.join(BASE_PATH,'AUDIO', 'synthom.wav')
+        self.synthom_sfx = pygame.mixer.Sound(sound_path_synthom)
         timer_started = False
         fuente = pygame.font.SysFont('Arial', 34, bold=True)
         invert_keys = False
         game_ended = False  # Nueva variable para controlar si el juego ha terminado
-        self.music = pygame.mixer.Sound('AUDIO/music.mp3')
-        self.ambientation = pygame.mixer.Sound('AUDIO/ambientation.mp3')
-        self.loose = pygame.mixer.Sound('AUDIO/loose.wav')
+
+        sound_path_music = os.path.join(BASE_PATH,'AUDIO', 'music.mp3')
+        self.music = pygame.mixer.Sound(sound_path_music)
+
+        sound_path_ambientation = os.path.join(BASE_PATH,'AUDIO', 'ambientation.mp3')
+        self.ambientation = pygame.mixer.Sound(sound_path_ambientation)
+
+        sound_path_loose = os.path.join(BASE_PATH,'AUDIO', 'loose.wav')
+        self.loose = pygame.mixer.Sound(sound_path_loose)
+
         ticks = 0  # Inicializamos ticks en 0
         while self.running:
             if not (game_ended) and timer_started:  # Solo actualizar el tiempo si el juego no ha terminado y el timer ha iniciado
@@ -94,6 +107,7 @@ class Game():
                     if not timer_started:
                         timer_started = True
                         ticks = pygame.time.get_ticks()  # Iniciamos el contador cuando se presiona una tecla
+                        self.remaining = 120
 
             
             self.all_sprites.update(dt, invert_keys, self.remaining)
@@ -117,7 +131,8 @@ class Game():
                 self.display_surface.blit(text, text_rect)
 
             # Dibujar la lista de objetivos
-            draw_objectives(self.display_surface, self.hoja_objetivos, self.lista_objetivo)
+            draw_objectives(self.lista_objetivo, self.display_surface, self.hoja_objetivos, self.memory_loss_manager)
+
             # Pantalla de inicio
             if not timer_started:
                 
@@ -164,6 +179,18 @@ class Game():
                 self.t_usado = self.duracion - self.remaining
                 used_minutes = self.t_usado // 60
                 used_seconds = self.t_usado % 60
+
+                #Perdida de memoria
+                # Perdida de memoria
+                self.memory_loss_manager.check_mensaje(self.lista_objetivo)
+                self.memory_loss_manager.actualizar(self.lista_objetivo)
+
+                # Mostrar mensaje previo al síntoma
+                if self.memory_loss_manager.mostrar_mensaje and self.memory_loss_manager.mensaje_actual:
+                    mensaje = str(self.memory_loss_manager.mensaje_actual)
+                    texto = fuente.render(mensaje, True, (255, 255, 255))
+                    texto_rect = texto.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+                    self.display_surface.blit(texto, texto_rect)
                 
                 if self.remaining < 0:
                     self.remaining = 0
@@ -178,7 +205,6 @@ class Game():
                 if self.remaining == 8:
                     self.effects_channel.play(self.loose)
                     self.effects_channel.set_volume(1.0)
-                    
 
                 minutes = self.remaining // 60
                 seconds = self.remaining % 60
