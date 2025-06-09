@@ -74,6 +74,7 @@ class Collectible(pygame.sprite.Sprite):
         self.objetivos = objetivos
         self.collected = False
         self.ground = False
+        self.collected_sfx = pygame.mixer.Sound('AUDIO/pick.mp3')
 
         # Escalado personalizado según el nombre del ítem, para que cada item tenga el tamaño que tienen en el tiled_map
         size_map = {
@@ -140,6 +141,7 @@ class Collectible(pygame.sprite.Sprite):
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_e] and not self.collected:
                     self.collected = True
+                    self.collected_sfx.play()
                     #Le crea al jugadro un inventario segun los elementos que va recogiendo
                     #ahora mismo no se usa
                     if self.name in player.inventory:
