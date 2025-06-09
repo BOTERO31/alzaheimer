@@ -236,7 +236,7 @@
   <object id="377" name="zanahoria" gid="146" x="1707.25" y="1001" width="43.5" height="58"/>
   <object id="394" name="zanahoria" gid="146" x="1720.92" y="1024.33" width="43.5" height="58"/>
   <object id="395" name="zanahoria" gid="2147483794" x="1690.25" y="1025.67" width="43.5" height="58"/>
-  <object id="402" name="yogurt" gid="145" x="1411.86" y="1430.15" width="20" height="22"/>
+  <object id="402" name="yogurt" gid="145" x="1411.86" y="1434.15" width="20" height="22"/>
   <object id="403" name="leche" gid="142" x="1490.48" y="1474.1" width="28.5833" height="32.4167"/>
   <object id="405" name="leche" gid="142" x="1557.38" y="1473.79" width="28.5833" height="32.4167"/>
   <object id="406" name="leche" gid="142" x="1848.93" y="1475.28" width="28.5833" height="32.4167"/>
@@ -244,10 +244,10 @@
   <object id="408" name="leche" gid="142" x="1915.83" y="1474.97" width="28.5833" height="32.4167"/>
   <object id="409" name="yogurt" gid="145" x="1723.33" y="1472.33" width="20" height="22"/>
   <object id="410" name="yogurt" gid="145" x="1744.67" y="1472.67" width="20" height="22"/>
-  <object id="413" name="yogurt" gid="145" x="1725.67" y="1429" width="20" height="22"/>
-  <object id="414" name="yogurt" gid="145" x="1385.33" y="1431" width="20" height="22"/>
-  <object id="415" name="yogurt" gid="145" x="1361.33" y="1431.67" width="20" height="22"/>
-  <object id="417" name="leche" gid="142" x="1497.71" y="1429.46" width="28.5833" height="32.4167"/>
+  <object id="413" name="yogurt" gid="145" x="1725.67" y="1433" width="20" height="22"/>
+  <object id="414" name="yogurt" gid="145" x="1385.33" y="1435" width="20" height="22"/>
+  <object id="415" name="yogurt" gid="145" x="1361.33" y="1435.67" width="20" height="22"/>
+  <object id="417" name="leche" gid="142" x="1497.71" y="1433.46" width="28.5833" height="32.4167"/>
   <object id="418" name="pescado" gid="152" x="1294.42" y="1860.58" width="40.5" height="33.5"/>
   <object id="419" name="pescado" gid="152" x="1945.08" y="1860.58" width="40.5" height="33.5"/>
   <object id="428" name="leche" gid="142" x="1524.71" y="1472.79" width="28.5833" height="32.4167"/>
@@ -279,7 +279,7 @@
   <object id="466" name="carne" gid="156" x="1303.67" y="1803.59" width="32.6667" height="29"/>
   <object id="467" name="carne" gid="156" x="1950.67" y="1902.92" width="32.6667" height="29"/>
   <object id="470" name="carne" gid="156" x="1300.33" y="1899.5" width="32.6667" height="29"/>
-  <object id="471" name="yogurt" gid="145" x="1750" y="1430" width="20" height="22"/>
+  <object id="471" name="yogurt" gid="145" x="1750" y="1434" width="20" height="22"/>
   <object id="473" name="helado" gid="150" x="1749" y="1903.5" width="28.5" height="36.5"/>
   <object id="474" name="helado" gid="150" x="1469.08" y="1895.08" width="28.5" height="36.5"/>
   <object id="475" name="helado" gid="150" x="1561.75" y="1895.75" width="28.5" height="36.5"/>
@@ -336,8 +336,8 @@
   <object id="530" name="arroz" gid="155" x="891.288" y="155.834" width="26.8333" height="35"/>
   <object id="531" name="arroz" gid="155" x="924.583" y="191.5" width="26.8333" height="35"/>
   <object id="532" name="arroz" gid="155" x="1284.58" y="191.5" width="26.8333" height="35"/>
-  <object id="533" name="harina" gid="158" x="298.417" y="152.333" width="24.5" height="34"/>
-  <object id="534" name="harina" gid="158" x="330.417" y="152.333" width="24.5" height="34"/>
+  <object id="533" name="harina" gid="158" x="298.417" y="156.333" width="24.5" height="34"/>
+  <object id="534" name="harina" gid="158" x="330.417" y="156.333" width="24.5" height="34"/>
   <object id="535" name="harina" gid="158" x="807.083" y="189.667" width="24.5" height="34"/>
   <object id="536" name="harina" gid="158" x="839.083" y="189.667" width="24.5" height="34"/>
   <object id="537" name="harina" gid="158" x="1330.42" y="191.667" width="24.5" height="34"/>

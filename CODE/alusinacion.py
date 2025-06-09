@@ -1,6 +1,5 @@
 import pygame
 import random
-import math
 import settings
 import time
 
@@ -23,9 +22,9 @@ def create_shape():
     b = random.randint(0,255)
     alpha = 200  # Comienza completamente visible
 
-    x = random.randint(0,settings.WINDOW_WIDTH)
-    y = random.randint(0,settings.WINDOW_HEIGHT)
     size = random.randint(50, 150)
+    x = random.randint(0, settings.WINDOW_WIDTH - size)
+    y = random.randint(0, settings.WINDOW_HEIGHT - size)
     
     figures = ["circle", "rect"]
     figure = random.choice(figures)
@@ -40,7 +39,7 @@ def draw_shape(window, shape):
     
     # Calcular el nuevo alpha (se desvanece linealmente)
     fade_progress = elapsed_time / shape.lifetime
-    new_alpha = int(255 * (1 - fade_progress))
+    new_alpha = max(0, int(255 * (1 - fade_progress)))
     
     # Crear superficie con el nuevo alpha
     surface = pygame.Surface((shape.size*2, shape.size*2), pygame.SRCALPHA)
@@ -60,7 +59,7 @@ def confusion(window):
     global active_shapes
     
     # Crear una nueva forma cada cierto tiempo
-    if random.random() < 0.1:  # 10% de probabilidad cada frame
+    if len(active_shapes) < 10 and random.random() < 0.1: #10% de probabilidad por frma y no haya mas de 10
         active_shapes.append(create_shape())
     
     # Actualizar y dibujar todas las formas activas

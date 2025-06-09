@@ -29,7 +29,7 @@ class Game():
         self.collision_sprite = pygame.sprite.Group()
 
         # setup
-        self.remaining = 40
+        self.remaining = 0
         self.setup()
 
     def setup(self):
@@ -140,6 +140,7 @@ class Game():
                 text = fuente.render(extra_text, True, (255, 255, 255))
                 text_rect = text.get_rect(center=(WINDOW_WIDTH*0.5, WINDOW_HEIGHT*0.7))
                 self.display_surface.blit(text, text_rect)
+
             if timer_started:
                 self.t_usado = self.duracion - self.remaining
                 used_minutes = self.t_usado // 60
@@ -147,8 +148,12 @@ class Game():
                 
                 if self.remaining < 0:
                     self.remaining = 0
-                if self.remaining < 60 and self.remaining > 15:
+
+                invertido = False
+                if not invertido and 15 < self.remaining < 60:
                     invert_keys = True
+                    invertido = True
+
                 if self.remaining < 30:
                     confusion(self.display_surface)
 

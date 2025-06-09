@@ -6,20 +6,16 @@ from settings import BASE_PATH
 
 def load_collectibles(map, player, all_sprites_group, collectible_group):
     generated_items = {}
+    collectibles = map.get_layer_by_name('Collectibles')
 
-    # Contar ítems
-    for obj in map.get_layer_by_name('Collectibles'):
+    # Primera pasada: contar y crear objetos
+    for obj in collectibles:
         name = obj.name.lower()
         generated_items[name] = generated_items.get(name, 0) + 1
 
-    print(f"Items generados: {generated_items}")
-
-    # Generar lista objetivo aleatoria
     lista_objetivo = randomly_generated(generated_items)
-    print("Lista objetivo aleatoria:", lista_objetivo)
 
-    # Crear objetos Collectible, tambien le envia la lista random a Collectible en "sprites"
-    for obj in map.get_layer_by_name('Collectibles'):
+    for obj in collectibles:
         name = obj.name.lower()
         Collectible(
             (obj.x, obj.y), obj.image,
@@ -28,6 +24,7 @@ def load_collectibles(map, player, all_sprites_group, collectible_group):
             name=name,
             objetivos=lista_objetivo
         )
+
 
     return lista_objetivo
 
@@ -47,7 +44,6 @@ def randomly_generated(generated_items):
         amount = generated_items[name]
         random_amount = random.randint(1, amount)
         random_list[name] = min(random_amount, amount)
-    print(amount)
     return random_list
 
 #Funcion para dibujar todo en orden

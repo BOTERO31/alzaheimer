@@ -93,8 +93,7 @@ class Collectible(pygame.sprite.Sprite):
             'arroz': (26.83, 35.00),
             'harina': (24.50, 34.00),
             'frijol': (31.67, 33.67),
-            'helado': (28.50, 36.50),
-            'chips': (30.17, 34.50)
+            'helado': (28.50, 36.50)
         }
 
         # Obtener el tamaño adecuado si el nombre coincide
@@ -104,10 +103,35 @@ class Collectible(pygame.sprite.Sprite):
 
         self.image = pygame.transform.scale(image, size)
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(70, 80)#Valores para ser recogido a distancia
+
+        large_hitbox = {
+            'leche': (40, 80),
+            'yogurt': (40, 80),
+            'cola': (40, 80),
+            'pan': (40, 80),
+            'queso': (40, 80),
+            'agua': (40, 80),
+            'arroz': (40, 80),
+            'harina': (40, 80),
+            'frijol': (40, 80),
+        }
+
+        # Buscar si el ítem está en la lista de hitbox grandes
+        for key in large_hitbox:
+            if key in self.name:
+                w, h = large_hitbox[key]
+                self.hitbox = self.rect.inflate(w, h)
+                break
+        else:
+            self.hitbox = self.rect.inflate(40, 50)
 
         # Marcar si debe ir en la capa superior, estos elementos siempre se van a dibujar enciama del resto
-        self.top_layer = 'manzana' in self.name or 'zanahoria' in self.name or 'zanahoria' in self.name or 'cebolla' in self.name or 'pescado' in self.name or 'helado' in self.name or 'carne' in self.name
+        self.top_layer = (
+            'manzana' in self.name or 'zanahoria' in self.name 
+            or 'zanahoria' in self.name or 'cebolla' in self.name 
+            or 'pescado' in self.name or 'helado' in self.name 
+            or 'carne' in self.name or 'harina' in self.name
+        )
 
     def update(self, dt, invert_keys, remaining):
 
@@ -126,16 +150,13 @@ class Collectible(pygame.sprite.Sprite):
 
                     #Verifica los elementos recogidos con la lista creada aleatoria en "list"
                     if self.objetivos and self.name in self.objetivos:
-                        self.objetivos[self.name] -=1 #Le resta el elemento si se recoge
-                        
-                        #Logica del contador de puntos
-                        player.puntos += (player.inventory[self.name] * 100)
+                        if self.objetivos[self.name] > 0:
+                            self.objetivos[self.name] -=1 #Le resta el elemento si se recoge
+                            player.puntos += 100 #Logica del contador de puntos
                         
                         if remaining > 0 :
-                            player.puntos = player.puntos                  
-                        if self.objetivos[self.name] <= 0: #Cuando la lista llega a 0 o menos, la mantiene en 0
-                            self.objetivos[self.name] = 0 
-                            #Este es el valor que lee en 'completado = cantidad == 0' de "list"
+                            player.puntos = player.puntos          
+
                         print("puntos", player.puntos)
                         print(f"Objetivos restantes: {self.objetivos}")
                     self.kill()  # Eliminar el ítem
