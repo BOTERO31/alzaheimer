@@ -5,6 +5,7 @@ from pytmx.util_pygame import load_pygame
 from groups import AllSprites
 from list import load_collectibles, draw_objectives
 from alusinacion import confusion
+from puntuacion import Puntuacion
 
 class Game():
     def __init__(self):
@@ -14,6 +15,10 @@ class Game():
         pygame.display.set_caption('Mind Maze: Supermarket Rush')
         self.clock = pygame.time.Clock()
         self.running = True
+        self.duracion = 90
+        
+        # Inicializar sistema de puntuación
+        self.puntuacion = Puntuacion()
         
         #Cargar hoja, la del fondo en la lista de items
         hoja_path = os.path.join(BASE_PATH, 'DATA', 'graphics', 'ui', 'hoja.png')
@@ -68,13 +73,10 @@ class Game():
         
         ticks = pygame.time.get_ticks()
         while self.running:
-            duracion = 90
+            
             if not game_ended:  # Solo actualizar el tiempo si el juego no ha terminado
                 seconds_passed = (pygame.time.get_ticks() - ticks) // 1000
-                self.remaining = duracion - seconds_passed
-            duracion = 90
-            seconds_passed = (pygame.time.get_ticks() - ticks) // 1000
-            self.remaining = duracion - seconds_passed
+                self.remaining = self.duracion - seconds_passed
             dt = self.clock.tick() / 500
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -89,10 +91,21 @@ class Game():
             self.all_sprites.draw(self.player.rect.center)
             
             # mostrar contador de puntos
-            puntos_text = (f"{self.player.puntos}")
+            puntos_text = (f"Puntos: {self.player.puntos}")
             text = fuente.render(puntos_text, True, (255, 255, 255))
-            text_rect = text.get_rect(center=( 1200, 60))
+            text_rect = text.get_rect(center=(1100, 40))
             self.display_surface.blit(text, text_rect)
+            
+            # mostrar mejor puntuacion
+            if self.puntuacion.mejor_puntuacion:
+                mejor_puntuacion = self.puntuacion.mejor_puntuacion[0]
+                self.best_time = mejor_puntuacion['tiempo']
+                best_min = self.best_time // 60
+                best_sec = self.best_time%60
+                max_puntos_text = f"Mejor: {mejor_puntuacion['puntuacion']} - {best_min:01}:{best_sec:02}"
+                text = fuente.render(max_puntos_text, True, (255, 255, 255))
+                text_rect = text.get_rect(center=(1100, 80))
+                self.display_surface.blit(text, text_rect)
 
             # Dibujar la lista de objetivos
             draw_objectives(self.display_surface, self.hoja_objetivos, self.lista_objetivo)
@@ -128,6 +141,9 @@ class Game():
                 text_rect = text.get_rect(center=(WINDOW_WIDTH*0.5, WINDOW_HEIGHT*0.7))
                 self.display_surface.blit(text, text_rect)
             if timer_started:
+                self.t_usado = self.duracion - self.remaining
+                used_minutes = self.t_usado // 60
+                used_seconds = self.t_usado % 60
                 
                 if self.remaining < 0:
                     self.remaining = 0
@@ -143,9 +159,7 @@ class Game():
                 text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, 60))
                 self.display_surface.blit(text, text_rect)
 
-                t_usado = duracion - self.remaining
-                used_minutes = t_usado // 60
-                used_seconds = t_usado % 60
+                
                 if not all(valor == 0 for valor in self.lista_objetivo.values()) and self.remaining == 0:
                     game_ended = True  # Detener el contador
                     self.display_surface.fill(BLACK)
@@ -158,7 +172,7 @@ class Game():
                         "Esc para salir"
                     ]
                     # Renderizar cada línea
-                    y_offset = WINDOW_HEIGHT // 2 - (len(lines) * 20) // 2
+                    y_offset = WINDOW_HEIGHT*0.3 - (len(lines) * 20) // 2
                     for line in lines:
                         text = fuente.render(line, True, (255, 255, 255))
                         text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, y_offset))
@@ -170,6 +184,10 @@ class Game():
                 elif all(valor == 0 for valor in self.lista_objetivo.values()):
                     game_ended = True  # Detener el contador
                     self.display_surface.fill(BLACK)
+                    
+                    # Guardar la puntuación actual
+                    self.puntuacion.guardar_puntuacion(self.player.puntos, self.t_usado)
+                    
                     # Lista de líneas de texto
                     lines = [
                         "Has ganado",
@@ -178,7 +196,7 @@ class Game():
                         "Esc para salir"
                     ]
                     # Renderizar cada línea
-                    y_offset = WINDOW_HEIGHT // 2 - (len(lines) * 20) // 2
+                    y_offset = WINDOW_HEIGHT*0.3 - (len(lines) * 20) // 2
                     for line in lines:
                         text = fuente.render(line, True, (255, 255, 255))
                         text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, y_offset))
