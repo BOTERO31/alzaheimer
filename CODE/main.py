@@ -196,15 +196,47 @@ class Game():
                     self.remaining = 0
 
                 invertido = False
+
+                # Inicializa estas banderas una sola vez en run()
+                if not hasattr(self, 'texto_invertido_mostrado'):
+                    self.texto_invertido_mostrado = False
+                if not hasattr(self, 'texto_confusion_mostrado'):
+                    self.texto_confusion_mostrado = False
+
+                # Mensaje previo al síntoma de inversión de teclas
+                if not self.texto_invertido_mostrado and 60 < self.remaining < 65:
+                    self.effects_channel.play(self.synthom_sfx)
+                    self.effects_channel.set_volume(1.0)
+                    extra_text = "¿Hacia dónde era...? ¿Cómo llego?"
+                    text = fuente.render(extra_text, True, (255, 255, 255))
+                    text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+                    self.display_surface.blit(text, text_rect)
+                    self.texto_invertido_mostrado = True
+
+                # Activar inversión de teclas
                 if not invertido and 15 < self.remaining < 60:
                     invert_keys = True
                     invertido = True
 
+                # Mensaje previo al síntoma de visión borrosa
+                if not self.texto_confusion_mostrado and 30 < self.remaining < 35:
+                    self.effects_channel.play(self.synthom_sfx)
+                    self.effects_channel.set_volume(1.0)
+                    extra_text = "Mi mente se nubla... mi visión se quiebra."
+                    text = fuente.render(extra_text, True, (255, 255, 255))
+                    text_rect = text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
+                    self.display_surface.blit(text, text_rect)
+                    self.texto_confusion_mostrado = True
+
+                # Efecto de visión borrosa
                 if self.remaining < 30:
                     confusion(self.display_surface)
+
+                # Sonido de derrota inminente
                 if self.remaining == 8:
                     self.effects_channel.play(self.loose)
                     self.effects_channel.set_volume(1.0)
+
 
                 minutes = self.remaining // 60
                 seconds = self.remaining % 60

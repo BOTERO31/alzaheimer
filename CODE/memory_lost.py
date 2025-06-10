@@ -3,7 +3,7 @@ import time
 import random
 
 class MemoryLossManager:
-    def __init__(self, intervalo=30):
+    def __init__(self, intervalo=60):
         self.last_memory_loss = time.time()
         self.memory_loss_interval = intervalo  # tiempo en segundos
         self.blur = set()
