@@ -55,6 +55,11 @@ class Game():
         # setup
         self.remaining = 90
         self.setup()
+    def reiniciar_juego(self):
+        self.display_surface.fill(BLACK)
+        pygame.display.flip()
+        self.__init__()  # Reinicia el juego desde cero
+        self.run()       # Corre el bucle principal de nuevo
         
     def show_logo(self):
         # Pantalla gris
@@ -243,10 +248,10 @@ class Game():
                 if self.remaining == 84:
                     self.synthom_sfx.play()
                     self.synthom_sfx.set_volume(1.0)
-                elif self.remaining == 50:
+                elif self.remaining == 49:
                     self.synthom_sfx.play()
                     self.synthom_sfx.set_volume(1.0)
-                elif self.remaining == 20:
+                elif self.remaining == 19:
                     self.synthom_sfx.play()
                     self.synthom_sfx.set_volume(1.0)
 
@@ -340,7 +345,8 @@ class Game():
                         "Has perdido",
                         f"Tiempo: {used_minutes:01}:{used_seconds:02}",
                         f"PUNTUACION: {self.player.puntos}",
-                        "Esc para salir"
+                        "Presiona ESC para salir",
+                        "Presiona R para volver al inicio"
                     ]
                     # Renderizar cada línea
                     y_offset = WINDOW_HEIGHT*0.3 - (len(lines) * 20) // 2
@@ -366,7 +372,8 @@ class Game():
                             "Has ganado",
                             f"Tiempo: {used_minutes:01}:{used_seconds:02}",
                             f"PUNTUACION: {self.player.puntos}",
-                            "Esc para salir"
+                            "Presiona ESC para salir",
+                            "Presiona R para volver al inicio"
                         ]
                         # Renderizar cada línea
                         y_offset = WINDOW_HEIGHT*0.3 - (len(lines) * 20) // 2
@@ -378,7 +385,9 @@ class Game():
                         keys = pygame.key.get_pressed()
                         if keys[pygame.K_ESCAPE]:
                             self.running = False
-    
+                        elif keys[pygame.K_r]:
+                            self.running = False
+                            self.reiniciar_juego()
             pygame.display.flip()
         pygame.quit()
 
