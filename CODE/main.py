@@ -194,7 +194,7 @@ class Game():
                 mejor_puntuacion = self.puntuacion.mejor_puntuacion[0]
                 self.best_time = mejor_puntuacion['tiempo']
                 best_min = self.best_time // 60
-                best_sec = self.best_time%60
+                best_sec = self.best_time % 60
                 max_puntos_text = f"Mejor: {mejor_puntuacion['puntuacion']} - {best_min:01}:{best_sec:02}"
                 text = fuente.render(max_puntos_text, True, (255, 255, 255))
                 text_rect = text.get_rect(center=(1100, 80))
@@ -314,10 +314,10 @@ class Game():
                     self.remaining = 0
 
                 # Activar inversión de teclas
-                if not self.invertido and 15 < self.remaining < 50:
+                if not (self.invertido) and 15 < self.remaining < 50:
                     invert_keys = True
                     self.invertido = True
-
+        
                 # Efecto de visión borrosa
                 if self.remaining < 20:
                     confusion(self.display_surface)
@@ -358,6 +358,10 @@ class Game():
                     keys = pygame.key.get_pressed()
                     if keys[pygame.K_ESCAPE]:
                         self.running = False
+                    
+                    elif keys[pygame.K_r]:
+                        self.running = False
+                        self.reiniciar_juego()
                 elif all(valor == 0 for valor in self.lista_objetivo.values()):
                     # Verifica si está tocando la caja registradora
                     if self.player.rect.colliderect(self.register_rect):

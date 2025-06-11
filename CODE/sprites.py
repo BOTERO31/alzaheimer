@@ -1,5 +1,17 @@
 from settings import *
 import pygame
+import os
+import sys
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    
+    return os.path.join(base_path, relative_path)
 
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, pos, surf, groups):
@@ -74,9 +86,10 @@ class Collectible(pygame.sprite.Sprite):
         self.objetivos = objetivos
         self.collected = False
         self.ground = False
-        sound_path = os.path.join(BASE_PATH,'AUDIO', 'pick.mp3')
+        
+        # Use the root AUDIO directory
+        sound_path = resource_path(os.path.join(BASE_PATH, 'AUDIO', 'pick.mp3'))
         self.collected_sfx = pygame.mixer.Sound(sound_path)
-
 
         # Escalado personalizado según el nombre del ítem, para que cada item tenga el tamaño que tienen en el tiled_map
         size_map = {
@@ -143,7 +156,8 @@ class Collectible(pygame.sprite.Sprite):
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_e] and not self.collected:
                     self.collected = True
-                    self.collected_sfx.play()
+                    if self.collected:
+                        self.collected_sfx.play()
                     #Le crea al jugadro un inventario segun los elementos que va recogiendo
                     #ahora mismo no se usa
                     if self.name in player.inventory:

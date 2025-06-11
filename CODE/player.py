@@ -1,6 +1,19 @@
 import pygame
+import os
+import sys
 from settings import *
 from sprites import *
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        # For development, use the project root directory
+        base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
+    return os.path.join(base_path, relative_path)
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, collision_sprites, remaining):
@@ -9,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.state, self.frame_index = 'left', 0
         
         # Construir la ruta completa a la imagen
-        image_path = os.path.join(BASE_PATH, 'IMAGES', 'player', 'down', '1.png')
+        image_path = resource_path(os.path.join('IMAGES', 'player', 'down', '1.png'))
       
         # Cargar y escalar la imagen
         self.image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (125, 125))
@@ -41,7 +54,7 @@ class Player(pygame.sprite.Sprite):
         
         for state in self.frames.keys():
             # Construir la ruta completa al directorio de sprites
-            sprite_path = os.path.join(BASE_PATH, 'IMAGES', 'player', state)
+            sprite_path = resource_path(os.path.join('IMAGES', 'player', state))
             if os.path.exists(sprite_path):
                 for file_name in sorted(os.listdir(sprite_path)):
                     if file_name.endswith('.png'):

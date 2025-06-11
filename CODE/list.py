@@ -1,8 +1,19 @@
 import pygame
 import os
 import random
+import sys
 from sprites import Collectible
 from settings import BASE_PATH
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    
+    return os.path.join(base_path, relative_path)
 
 def load_collectibles(map, player, all_sprites, collectible_group):
     generated_items = {}
@@ -50,7 +61,7 @@ def draw_objectives(lista_objetivo, display_surface, hoja, memoria):
     display_surface.blit(hoja, (x, y))
 
     #Carga el tipo de letra para los elementos de la lista
-    font_path = os.path.join(BASE_PATH, 'DATA', 'fonts', 'EBGaramond-BoldItalic.ttf')
+    font_path = resource_path(os.path.join(BASE_PATH,'DATA', 'fonts', 'EBGaramond-BoldItalic.ttf'))
     #El titulo y los objetivos tienen tamaños diferentes
     fuente_titulo = pygame.font.Font(font_path, 24)
     fuente_objetivo = pygame.font.Font(font_path, 22)
