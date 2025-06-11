@@ -7,4 +7,3 @@ def iscreen():
     pygame.draw.rect(pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT)), (0,0,0,200), irect)
      
     return irect
-

@@ -1,12 +1,17 @@
 # memory_lot.py
 import time
 import random
+from settings import *
+from shadow_text import draw_shadowed_text
 
 class MemoryLossManager:
-    def __init__(self, intervalo=60):
+    def __init__(self, intervalo=30):
         self.last_memory_loss = time.time()
         self.memory_loss_interval = intervalo  # tiempo en segundos
         self.blur = set()
+
+        sound_path_synthom = os.path.join(BASE_PATH,'AUDIO', 'synthom.wav')
+        self.synthom_sfx = pygame.mixer.Sound(sound_path_synthom)
 
         self.mensajes = [
             "Sientes una niebla mental... algo se está desvaneciendo.",
@@ -22,9 +27,9 @@ class MemoryLossManager:
 
 
 
-    def actualizar(self, lista_objetivo):
+    def actualizar(self, lista_objetivo, tiempo_restante):
         # Verifica si ya pasó suficiente tiempo
-        if time.time() - self.last_memory_loss >= self.memory_loss_interval:
+        if tiempo_restante <= 105 and time.time() - self.last_memory_loss >= self.memory_loss_interval:
             self.borrar_elemento(lista_objetivo)
             self.last_memory_loss = time.time()
 
@@ -50,3 +55,5 @@ class MemoryLossManager:
             self.mostrar_mensaje = False
             self.mensaje_actual = None
             self.item_a_borrar = None
+            self.synthom_sfx.play()
+            self.synthom_sfx.set_volume(1.0)
